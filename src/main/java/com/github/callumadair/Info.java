@@ -15,35 +15,17 @@ import java.util.*;
  * @author Callum Adair
  * @version 0.1
  */
-public class Info {
-    private Bot bot;
+public class Info extends BotAction {
 
     public Info(Bot bot) {
-        setBot(bot);
-    }
-
-
-    /**
-     * Changes the bot to the one specified.
-     *
-     * @param bot the specified bot.
-     */
-    private void setBot(Bot bot) {
-        this.bot = bot;
-    }
-
-    /**
-     * @return returns the current bot.
-     */
-    public Bot getBot() {
-        return bot;
+        super(bot);
     }
 
     /**
      * Implements the methods of the Info class.
      */
     public void listener() {
-        bot.getApi().addMessageCreateListener(event -> {
+        getBot().getApi().addMessageCreateListener(event -> {
             serverInfo(event);
             botInfo(event);
         });
@@ -51,18 +33,18 @@ public class Info {
     }
 
     /**
-     * Gets basic infromation about the bot user account in the event server.
+     * Gets basic information about the bot user account in the event server.
      *
      * @param event the specified event.
      */
     private void botInfo(MessageCreateEvent event) {
-        if (event.getMessageContent().equalsIgnoreCase(bot.getPrefix() + "binfo")) {
+        if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "binfo")) {
             EmbedBuilder botInfo = new EmbedBuilder();
-            User colossus = bot.getApi().getYourself();
+            User colossus = getBot().getApi().getYourself();
 
-            botInfo.setTitle("Bot Info").setColor(bot.getRoleColour()).setDescription(bot.getApi().getYourself().getName())
-                    .addField("Servers", ":robot: " + colossus.getName() + " is present in "
-                            + Integer.toString(colossus.getMutualServers().size()) + " servers");
+            botInfo.setTitle("Bot Info").setColor(getBot().getRoleColour()).setDescription(getBot().getApi()
+                    .getYourself().getName()).addField("Servers", ":robot: " + colossus.getName()
+                    + " is present in " + Integer.toString(colossus.getMutualServers().size()) + " servers");
 
             event.getChannel().sendMessage(botInfo);
         }
@@ -74,12 +56,12 @@ public class Info {
      * @param event the specified event
      */
     private void serverInfo(MessageCreateEvent event) {
-        if (event.getMessageContent().equalsIgnoreCase(bot.getPrefix() + "sinfo")) {
+        if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "sinfo")) {
             EmbedBuilder serverInfo = new EmbedBuilder();
             Server server = event.getServer().get();
 
-            serverInfo.setTitle("Server Info").setColor(bot.getRoleColour()).setDescription(server.getName()).addField(
-                    "Members",
+            serverInfo.setTitle("Server Info").setColor(getBot().getRoleColour()).setDescription(server.getName())
+                    .addField("Members",
                     ":two_men_holding_hands: " + Integer.toString(server.getMemberCount()) + " members (:robot: "
                             + Integer.toString(getBotCount(server)) + " bots), " + getOnlineUsers(server) + " online.")
                     .addField("Channels",

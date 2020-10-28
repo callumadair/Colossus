@@ -8,32 +8,15 @@ import org.javacord.api.DiscordApi;
  * @author Callum Adair
  * @version 1.0
  */
-public class Pong {
-    private Bot bot;
+public class Pong extends BotAction{
 
     /**
-     * Creates a new instance of the class using the specifed api and bot.
+     * Creates a new instance of the class using the specified api and bot.
      *
      * @param bot the specified bot.
      */
     public Pong(Bot bot) {
-        setBot(bot);
-    }
-
-    /**
-     * Changes the bot to the one specified.
-     *
-     * @param bot the specified bot.
-     */
-    private void setBot(Bot bot) {
-        this.bot = bot;
-    }
-
-    /**
-     * @return returns the current bot.
-     */
-    public Bot getBot() {
-        return bot;
+        super(bot);
     }
 
     /**
@@ -47,15 +30,15 @@ public class Pong {
      * Responds to the ping message and calculates the latency of the response.
      */
     private void getPing() {
-        bot.getApi().addMessageCreateListener(event -> {
-            if (event.getMessageContent().equalsIgnoreCase(bot.getPrefix() + "ping")) {
-                Long firstTime = event.getMessage().getCreationTimestamp().toEpochMilli();
+        getBot().getApi().addMessageCreateListener(event -> {
+            if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "ping")) {
+                long firstTime = event.getMessage().getCreationTimestamp().toEpochMilli();
                 event.getChannel().sendMessage("Pong!");
 
-                bot.getApi().addMessageCreateListener(listen -> {
+                getBot().getApi().addMessageCreateListener(listen -> {
                     if (listen.getMessageContent().equals("Pong!")) {
-                        Long secondTime = listen.getMessage().getCreationTimestamp().toEpochMilli();
-                        Long ping = secondTime - firstTime;
+                        long secondTime = listen.getMessage().getCreationTimestamp().toEpochMilli();
+                        long ping = secondTime - firstTime;
                         listen.getMessage().edit("Pong! `" + ping + "ms`");
                     }
                 });

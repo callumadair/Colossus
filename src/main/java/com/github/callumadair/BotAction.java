@@ -1,7 +1,7 @@
 package com.github.callumadair;
 
 /**
- * The type BotAction, an abstact superclass for all bot actions.
+ * The type BotAction, an abstract superclass for all bot actions.
  */
 public abstract class BotAction {
     private Bot bot;
