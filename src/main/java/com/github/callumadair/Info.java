@@ -62,20 +62,22 @@ class Info extends BotAction {
     private void serverInfo(MessageCreateEvent event) {
         if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "serverinfo")) {
             EmbedBuilder serverInfo = new EmbedBuilder();
-            Server server = event.getServer().orElse(null);
+            Server server = event.getServer().get();
 
-
-            serverInfo.setTitle("Server Info").setColor(getBot().getRoleColour())
-                    .setDescription(Objects.requireNonNull(server).getName())
-                    .addField("Members", ":two_men_holding_hands: " + server.getMemberCount()
-                            + " members (:robot: " + getBotCount(server) + " bots), " + getOnlineUsers(server)
-                            + " online.")
-                    .addField("Channels", (server.getChannels().size()
-                            - server.getChannelCategories().size()) + " channels")
-                    .addField("Owner",
-                            Objects.requireNonNull(server.getOwner().orElse(null)).getMentionTag())
-                    .addField("Creation Date",
-                            server.getCreationTimestamp().truncatedTo(ChronoUnit.MINUTES).toString());
+            try {
+                serverInfo.setTitle("Server Info").setColor(getBot().getRoleColour()).setDescription(server.getName())
+                        .addField("Members", ":two_men_holding_hands: " + server.getMemberCount()
+                                + " members (:robot: " + getBotCount(server) + " bots), " + getOnlineUsers(server)
+                                + " online.")
+                        .addField("Channels", (server.getChannels().size()
+                                - server.getChannelCategories().size()) + " channels")
+                        // currently broken, need to consult the javacord devs
+                        // .addField("Owner", server.getOwner().get().getDiscriminatedName())
+                        .addField("Creation Date",
+                                server.getCreationTimestamp().truncatedTo(ChronoUnit.MINUTES).toString());
+            } catch (NoSuchElementException e) {
+                System.out.println(e.getMessage());
+            }
 
             event.getChannel().sendMessage(serverInfo);
         }
