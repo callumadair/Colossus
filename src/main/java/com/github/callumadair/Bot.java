@@ -3,22 +3,23 @@ package com.github.callumadair;
 import org.javacord.api.*;
 
 import java.awt.*;
+import java.util.*;
 
 /**
  * A bot implements a discord bot and gives it features to enable it's
  * functionality.
- * 
+ *
  * @author Callum Adair
  * @version 0.2
  */
-public class Bot {
+class Bot {
     private String commandPrefix;
     private Color roleColour;
     private DiscordApi api;
 
     /**
      * Specifies the api, command prefix and role colour.
-     * 
+     *
      * @param api           the api for the bot to use.
      * @param commandPrefix the prefix for the bot to use.
      * @param roleColour    the colour of the bot in the discord server to be set on
@@ -33,7 +34,7 @@ public class Bot {
 
     /**
      * Changes the api to the one specified.
-     * 
+     *
      * @param api the specified api.
      */
     private void setApi(DiscordApi api) {
@@ -41,7 +42,6 @@ public class Bot {
     }
 
     /**
-     * 
      * @return returns the current api.
      */
     public DiscordApi getApi() {
@@ -50,7 +50,7 @@ public class Bot {
 
     /**
      * Changes the command prefix to the specified string.
-     * 
+     *
      * @param commandPrefix the specified string.
      */
     private void setPrefix(String commandPrefix) {
@@ -58,7 +58,6 @@ public class Bot {
     }
 
     /**
-     * 
      * @return returns the current command prefix.
      */
     public String getPrefix() {
@@ -67,7 +66,7 @@ public class Bot {
 
     /**
      * Sets the colour of the bot's role to the one specified.
-     * 
+     *
      * @param roleColour the specified colour.
      */
     private void setColour(Color roleColour) {
@@ -75,7 +74,6 @@ public class Bot {
     }
 
     /**
-     * 
      * @return returns the colour of the bot's colour role.
      */
     public Color getRoleColour() {
@@ -86,30 +84,21 @@ public class Bot {
      * Instantiates all classes and methods of the bot's functionality.
      */
     public void listener() {
-        com.github.callumadair.Pong pong = new com.github.callumadair.Pong(this);
-        pong.listener();
+        ArrayList<BotAction> botActions = new ArrayList<>();
 
-        Time time = new Time(this);
-        time.listener();
+        botActions.add(new BotSetup(this));
+        botActions.add(new FungWah(this));
+        botActions.add(new Info(this));
+        botActions.add(new Invites(this));
+        botActions.add(new Pong(this));
+        botActions.add(new Purge(this));
+        botActions.add(new RoleManagement(this));
+        botActions.add(new ShutDown(this));
+        botActions.add(new Time(this));
 
-        com.github.callumadair.Invites invite = new com.github.callumadair.Invites(this);
-        invite.listener();
-
-        Info info = new Info(this);
-        info.listener();
-
-        com.github.callumadair.Purge purge = new com.github.callumadair.Purge(this);
-        purge.listener();
-
-        com.github.callumadair.RoleManagement roleManager = new com.github.callumadair.RoleManagement(this);
-        roleManager.listener();
-
-        com.github.callumadair.BotSetup setup = new com.github.callumadair.BotSetup(this);
-        setup.listener();
-
-        com.github.callumadair.FungWah fung = new com.github.callumadair.FungWah(this);
-        fung.listener();
-
+        for (BotAction botAction : botActions) {
+            botAction.listener();
+        }
     }
 
 }
