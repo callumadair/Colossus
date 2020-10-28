@@ -20,7 +20,7 @@ import org.javacord.api.event.message.MessageCreateEvent;
 class Invites extends BotAction{
 
     /**
-     * Creates a new instance of the invite class with the specified api and bot.
+     * Creates a new instance of the invite class with the specified bot.
      *
      * @param bot the specified bot.
      */
