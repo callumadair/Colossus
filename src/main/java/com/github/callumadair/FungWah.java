@@ -7,44 +7,25 @@ import java.awt.*;
 
 /**
  * A special class for Fung Wah.
+ *
  * @author Callum Adair
  * @version 0.1
  */
 public class FungWah {
-    private DiscordApi api;
     private Bot bot;
 
     /**
      * Creates a new instance of Fung Wah with the specified api and bot.
-     * 
-     * @param api the specified api.
+     *
      * @param bot the specified bot.
      */
-    public FungWah(DiscordApi api, Bot bot) {
-        setApi(api);
+    public FungWah(Bot bot) {
         setBot(bot);
     }
 
     /**
-     * Changes the api to the one specified.
-     * 
-     * @param api the specified api.
-     */
-    private void setApi(DiscordApi api) {
-        this.api = api;
-    }
-
-    /**
-     * 
-     * @return returns the current api.
-     */
-    public DiscordApi getApi() {
-        return api;
-    }
-
-    /**
      * Changes the bot to the one specified.
-     * 
+     *
      * @param bot the specified bot.
      */
     private void setBot(Bot bot) {
@@ -52,12 +33,12 @@ public class FungWah {
     }
 
     /**
-     * 
      * @return returns the current bot.
      */
     public Bot getBot() {
         return bot;
     }
+
     /**
      * Implements the methods of the class.
      */
@@ -65,13 +46,12 @@ public class FungWah {
         bully();
     }
 
-    
 
     /**
      * Bullies Fung Wah.
      */
     private void bully() {
-        api.addMessageCreateListener(event -> {
+        bot.getApi().addMessageCreateListener(event -> {
             if (event.getMessageAuthor().isBotOwner()
                     && event.getMessageContent().equalsIgnoreCase(bot.getPrefix() + "fungwah")) {
                 EmbedBuilder fungWah = new EmbedBuilder();

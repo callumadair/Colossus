@@ -19,36 +19,18 @@ import org.javacord.api.event.message.MessageCreateEvent;
  * @version 0.5
  */
 public class Invites {
-    private DiscordApi api;
     private Bot bot;
 
     /**
      * Creates a new instance of the invite class with the specified api and bot.
-     * 
-     * @param api the specified api.
+     *
      * @param bot the specified bot.
      */
-    public Invites(DiscordApi api, Bot bot) {
-        setApi(api);
+    public Invites(Bot bot) {
         setBot(bot);
     }
 
-    /**
-     * Changes the api to the one specified.
-     * 
-     * @param api the specified api.
-     */
-    private void setApi(DiscordApi api) {
-        this.api = api;
-    }
 
-    /**
-     * 
-     * @return returns the current api.
-     */
-    public DiscordApi getApi() {
-        return api;
-    }
 
     /**
      * Changes the bot to the one specified.
@@ -71,7 +53,7 @@ public class Invites {
      * Implements the methods of the class.
      */
     public void listener() {
-        api.addMessageCreateListener(event -> {
+        bot.getApi().addMessageCreateListener(event -> {
             createServerInvite(event);
             createBotInvite(event);
             sendServerInvite(event);
@@ -163,7 +145,7 @@ public class Invites {
         Permissions colossusPerms = colossusPermsBuilder.build();
 
         EmbedBuilder botInvite = new EmbedBuilder();
-        botInvite.setTitle("Invite Colossus here!").setUrl(api.createBotInvite(colossusPerms))
+        botInvite.setTitle("Invite Colossus here!").setUrl(bot.getApi().createBotInvite(colossusPerms))
                 .setAuthor(event.getMessageAuthor()).setFooter("Made by Cal").setTimestampToNow()
                 .setColor(bot.getRoleColour());
         return botInvite;

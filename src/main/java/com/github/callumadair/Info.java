@@ -16,29 +16,12 @@ import java.util.*;
  * @version 0.1
  */
 public class Info {
-    private DiscordApi api;
     private Bot bot;
 
-    public Info(DiscordApi api, Bot bot) {
-        setApi(api);
+    public Info(Bot bot) {
         setBot(bot);
     }
 
-    /**
-     * Changes the api to the one specified.
-     *
-     * @param api the specified api.
-     */
-    private void setApi(DiscordApi api) {
-        this.api = api;
-    }
-
-    /**
-     * @return returns the current api.
-     */
-    public DiscordApi getApi() {
-        return api;
-    }
 
     /**
      * Changes the bot to the one specified.
@@ -60,7 +43,7 @@ public class Info {
      * Implements the methods of the Info class.
      */
     public void listener() {
-        api.addMessageCreateListener(event -> {
+        bot.getApi().addMessageCreateListener(event -> {
             serverInfo(event);
             botInfo(event);
         });
@@ -75,9 +58,9 @@ public class Info {
     private void botInfo(MessageCreateEvent event) {
         if (event.getMessageContent().equalsIgnoreCase(bot.getPrefix() + "binfo")) {
             EmbedBuilder botInfo = new EmbedBuilder();
-            User colossus = api.getYourself();
+            User colossus = bot.getApi().getYourself();
 
-            botInfo.setTitle("Bot Info").setColor(bot.getRoleColour()).setDescription(api.getYourself().getName())
+            botInfo.setTitle("Bot Info").setColor(bot.getRoleColour()).setDescription(bot.getApi().getYourself().getName())
                     .addField("Servers", ":robot: " + colossus.getName() + " is present in "
                             + Integer.toString(colossus.getMutualServers().size()) + " servers");
 
