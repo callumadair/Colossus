@@ -1,9 +1,7 @@
 package com.github.callumadair;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.permission.PermissionType;
@@ -21,10 +19,8 @@ import org.javacord.api.event.message.MessageCreateEvent;
  * @version 0.2
  */
 public class RoleManagement extends BotAction {
-    private static List<Role> moderatorRoles;
     private static Role muted;
     private static Role member;
-    private static Role everyone;
 
     /**
      * Creates a new instance of the class with the specified bot.
@@ -34,6 +30,7 @@ public class RoleManagement extends BotAction {
     public RoleManagement(Bot bot) {
         super(bot);
     }
+
 
     /**
      * Implements the methods of the class.
@@ -45,7 +42,7 @@ public class RoleManagement extends BotAction {
             removeRole(event);
             clearRoles(event);
             createAdminRole(event);
-            setModRole(event);
+            setModeratorRoles(event);
             createMutedRole(event);
             muteUser(event);
             roles(event);
@@ -156,7 +153,7 @@ public class RoleManagement extends BotAction {
     public void clearRoles(MessageCreateEvent event) {
         if (event.getMessageAuthor().isBotOwner()
                 && event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "clearroles")) {
-            List<Role> allRoles = event.getServer().get().getRoles();
+            List<Role> allRoles = Objects.requireNonNull(event.getServer().orElse(null)).getRoles();
 
             for (Role role : allRoles) {
                 if (!role.isEveryoneRole()) {
@@ -179,7 +176,7 @@ public class RoleManagement extends BotAction {
         if ((event.getMessageAuthor().isServerAdmin())
                 && (event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "createadminrole"))) {
 
-            RoleBuilder newRole = event.getServer().get().createRoleBuilder();
+            RoleBuilder newRole = Objects.requireNonNull(event.getServer().orElse(null)).createRoleBuilder();
             newRole.setName("Admin").setColor(Color.GREEN);
 
             PermissionsBuilder adminPerms = new PermissionsBuilder();
@@ -203,7 +200,7 @@ public class RoleManagement extends BotAction {
      *
      * @param event the specified event.
      */
-    private void setModRole(MessageCreateEvent event) {
+    private void setModeratorRoles(MessageCreateEvent event) {
 
         if (event.getMessageAuthor().isServerAdmin()
                 && event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "setmod")) {
@@ -212,8 +209,8 @@ public class RoleManagement extends BotAction {
                     PermissionType.MANAGE_ROLES, PermissionType.MUTE_MEMBERS, PermissionType.VIEW_AUDIT_LOG);
             Permissions perms = modPerms.build();
 
-            List<Role> modRoles = event.getMessage().getMentionedRoles();
-            for (Role modRole : modRoles) {
+            List<Role> moderatorRoles = event.getMessage().getMentionedRoles();
+            for (Role modRole : moderatorRoles) {
                 modRole.updatePermissions(perms);
                 moderatorRoles.add(modRole);
                 event.getChannel().sendMessage(modRole.getName() + " is now a moderator role");
@@ -221,7 +218,6 @@ public class RoleManagement extends BotAction {
         }
 
     }
-    
 
     /**
      * Creates a muted role, an ordinary member role and updates the permissions of
@@ -239,7 +235,7 @@ public class RoleManagement extends BotAction {
             mutedPerms.setAllowed(PermissionType.READ_MESSAGES, PermissionType.READ_MESSAGE_HISTORY);
             Permissions perms = mutedPerms.build();
 
-            RoleBuilder newMute = new RoleBuilder(event.getServer().get());
+            RoleBuilder newMute = new RoleBuilder(event.getServer().orElse(null));
             newMute.setName("Muted").setPermissions(perms);
             muted = newMute.create().join();
             muted.updateMentionableFlag(true);
@@ -248,7 +244,7 @@ public class RoleManagement extends BotAction {
             normalPerms.setAllowed(PermissionType.SEND_MESSAGES, PermissionType.SPEAK, PermissionType.STREAM,
                     PermissionType.READ_MESSAGES, PermissionType.READ_MESSAGE_HISTORY);
             Permissions normPerms = normalPerms.build();
-            RoleBuilder normalUser = new RoleBuilder(event.getServer().get());
+            RoleBuilder normalUser = new RoleBuilder(event.getServer().orElse(null));
             normalUser.setName("Member").setPermissions(normPerms);
             member = normalUser.create().join();
             member.updateMentionableFlag(false);
@@ -256,7 +252,7 @@ public class RoleManagement extends BotAction {
             PermissionsBuilder everyonePerms = new PermissionsBuilder();
             everyonePerms.setDenied(PermissionType.SEND_MESSAGES, PermissionType.SPEAK, PermissionType.STREAM);
             Permissions everyPerms = everyonePerms.build();
-            everyone = event.getServer().get().getEveryoneRole();
+            Role everyone = Objects.requireNonNull(event.getServer().orElse(null)).getEveryoneRole();
             everyone.updatePermissions(everyPerms);
             everyone.updateMentionableFlag(false);
 
@@ -265,7 +261,7 @@ public class RoleManagement extends BotAction {
                 user.addRole(member);
             }
 
-            List<Role> autoRoles = new ArrayList<Role>();
+            List<Role> autoRoles = new ArrayList<>();
             autoRoles.add(member);
             autoRole(autoRoles);
 
@@ -315,10 +311,10 @@ public class RoleManagement extends BotAction {
      */
     private void roles(MessageCreateEvent event) {
         if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "roles")) {
-            List<Role> allRoles = event.getServer().get().getRoles();
+            List<Role> allRoles = Objects.requireNonNull(event.getServer().orElse(null)).getRoles();
             StringBuilder roleMentions = new StringBuilder();
             for (Role role : allRoles) {
-                roleMentions.append(role.getMentionTag() + "\n");
+                roleMentions.append(role.getMentionTag()).append("\n");
             }
 
             EmbedBuilder embed = new EmbedBuilder();
