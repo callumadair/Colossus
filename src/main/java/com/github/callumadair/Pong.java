@@ -4,46 +4,25 @@ import org.javacord.api.DiscordApi;
 
 /**
  * A class for finding the latency of the application.
- * 
+ *
  * @author Callum Adair
  * @version 1.0
- * 
  */
 public class Pong {
-    private DiscordApi api;
     private Bot bot;
 
     /**
      * Creates a new instance of the class using the specifed api and bot.
-     * 
-     * @param api the specified api.
+     *
      * @param bot the specified bot.
      */
-    public Pong(DiscordApi api, Bot bot) {
-        setApi(api);
+    public Pong(Bot bot) {
         setBot(bot);
     }
 
     /**
-     * Changes the api to the one specified.
-     * 
-     * @param api the specified api.
-     */
-    private void setApi(DiscordApi api) {
-        this.api = api;
-    }
-
-    /**
-     * 
-     * @return returns the current api.
-     */
-    public DiscordApi getApi() {
-        return api;
-    }
-
-    /**
      * Changes the bot to the one specified.
-     * 
+     *
      * @param bot the specified bot.
      */
     private void setBot(Bot bot) {
@@ -51,7 +30,6 @@ public class Pong {
     }
 
     /**
-     * 
      * @return returns the current bot.
      */
     public Bot getBot() {
@@ -69,12 +47,12 @@ public class Pong {
      * Responds to the ping message and calculates the latency of the response.
      */
     private void getPing() {
-        api.addMessageCreateListener(event -> {
+        bot.getApi().addMessageCreateListener(event -> {
             if (event.getMessageContent().equalsIgnoreCase(bot.getPrefix() + "ping")) {
                 Long firstTime = event.getMessage().getCreationTimestamp().toEpochMilli();
                 event.getChannel().sendMessage("Pong!");
 
-                api.addMessageCreateListener(listen -> {
+                bot.getApi().addMessageCreateListener(listen -> {
                     if (listen.getMessageContent().equals("Pong!")) {
                         Long secondTime = listen.getMessage().getCreationTimestamp().toEpochMilli();
                         Long ping = secondTime - firstTime;

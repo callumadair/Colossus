@@ -17,48 +17,28 @@ import org.javacord.api.event.message.MessageCreateEvent;
 
 /**
  * A class for managing roles in a discord server.
- * 
+ *
  * @author Callum Adair
  * @version 0.1
  */
 public class RoleManagement {
     private static List<Role> moderatorRoles;
     private static Role muted, member, everyone;
-    private DiscordApi api;
     private Bot bot;
 
     /**
      * Creates a new instance of the class with the specified api and bot.
-     * 
-     * @param api the specified api.
+     *
      * @param bot the specified bot.
      */
-    public RoleManagement(DiscordApi api, Bot bot) {
-        setApi(api);
+    public RoleManagement(Bot bot) {
         setBot(bot);
 
     }
 
     /**
-     * Changes the api to the one specified.
-     * 
-     * @param api the specified api.
-     */
-    private void setApi(DiscordApi api) {
-        this.api = api;
-    }
-
-    /**
-     * 
-     * @return returns the current api.
-     */
-    public DiscordApi getApi() {
-        return api;
-    }
-
-    /**
      * Changes the bot to the one specified.
-     * 
+     *
      * @param bot the specified bot.
      */
     private void setBot(Bot bot) {
@@ -66,7 +46,6 @@ public class RoleManagement {
     }
 
     /**
-     * 
      * @return returns the current bot.
      */
     public Bot getBot() {
@@ -77,7 +56,7 @@ public class RoleManagement {
      * Implements the methods of the class.
      */
     public void listener() {
-        api.addMessageCreateListener(event -> {
+        bot.getApi().addMessageCreateListener(event -> {
             addRole(event);
             autoRole(event);
             removeRole(event);
@@ -92,7 +71,7 @@ public class RoleManagement {
 
     /**
      * Gives the mentioned user in the event the mentioned roles from the event.
-     * 
+     *
      * @param event the specified event
      */
     private void addRole(MessageCreateEvent event) {
@@ -121,7 +100,7 @@ public class RoleManagement {
     /**
      * Sets the mentioned roles from the event to every new join in the discord
      * server.
-     * 
+     *
      * @param event the specified event.
      */
     private void autoRole(MessageCreateEvent event) {
@@ -145,11 +124,11 @@ public class RoleManagement {
 
     /**
      * Sets the specified roles to be given to every new join in the discord server.
-     * 
+     *
      * @param autoRoles the specified list of roles.
      */
     private void autoRole(List<Role> autoRoles) {
-        api.addServerMemberJoinListener(listen -> {
+        bot.getApi().addServerMemberJoinListener(listen -> {
 
             for (Role role : autoRoles) {
                 listen.getUser().addRole(role);
@@ -159,7 +138,7 @@ public class RoleManagement {
 
     /**
      * Removes the mention roles from the mentioned users in the specified event.
-     * 
+     *
      * @param event the specified event.
      */
     private void removeRole(MessageCreateEvent event) {
@@ -188,7 +167,7 @@ public class RoleManagement {
     /**
      * Deletes all the roles beneath the application is able to from the event
      * discord server.
-     * 
+     *
      * @param event the specified event.
      */
     public void clearRoles(MessageCreateEvent event) {
@@ -209,7 +188,7 @@ public class RoleManagement {
     /**
      * Creates a new administrator role in the specified event server with the
      * specified role name and colour.
-     * 
+     *
      * @param event the specified event.
      */
     private void createAdminRole(MessageCreateEvent event) {
@@ -238,7 +217,7 @@ public class RoleManagement {
     /**
      * Gives the roles mentioned "moderator" permissions in the specified event's
      * discord server.
-     * 
+     *
      * @param event the specified event.
      */
     private void setModRole(MessageCreateEvent event) {
@@ -262,7 +241,7 @@ public class RoleManagement {
 
     /**
      * Checks if the specified role is a "moderator" role.
-     * 
+     *
      * @param role the specified role.
      * @return returns true if the role is a moderator role.
      */
@@ -276,7 +255,7 @@ public class RoleManagement {
     /**
      * Creates a muted role, an ordinary member role and updates the permissions of
      * the everyone role in the specified event's discord server.
-     * 
+     *
      * @param event the specified event.
      */
     private void createMutedRole(MessageCreateEvent event) {
@@ -326,7 +305,7 @@ public class RoleManagement {
 
     /**
      * Mute's the mentioned user in the specified event's discord server.
-     * 
+     *
      * @param event the specified event.
      */
     private void muteUser(MessageCreateEvent event) {
@@ -360,7 +339,7 @@ public class RoleManagement {
 
     /**
      * Lists out all the roles in the specified event's discord server.
-     * 
+     *
      * @param event the specified event.
      */
     private void roles(MessageCreateEvent event) {

@@ -86,28 +86,28 @@ public class Bot {
      * Instantiates all classes and methods of the bot's functionality.
      */
     public void listener() {
-        com.github.callumadair.Pong pong = new com.github.callumadair.Pong(api, this);
+        com.github.callumadair.Pong pong = new com.github.callumadair.Pong(this);
         pong.listener();
 
-        Time time = new Time(api, this);
+        Time time = new Time(this);
         time.listener();
 
-        com.github.callumadair.Invites invite = new com.github.callumadair.Invites(api, this);
+        com.github.callumadair.Invites invite = new com.github.callumadair.Invites(this);
         invite.listener();
 
-        Info info = new Info(api, this);
+        Info info = new Info(this);
         info.listener();
 
-        com.github.callumadair.Purge purge = new com.github.callumadair.Purge(api, this);
+        com.github.callumadair.Purge purge = new com.github.callumadair.Purge(this);
         purge.listener();
 
-        com.github.callumadair.RoleManagement roleManager = new com.github.callumadair.RoleManagement(api, this);
+        com.github.callumadair.RoleManagement roleManager = new com.github.callumadair.RoleManagement(this);
         roleManager.listener();
 
         com.github.callumadair.BotSetup setup = new com.github.callumadair.BotSetup(this);
         setup.listener();
 
-        com.github.callumadair.FungWah fung = new com.github.callumadair.FungWah(api, this);
+        com.github.callumadair.FungWah fung = new com.github.callumadair.FungWah(this);
         fung.listener();
 
     }

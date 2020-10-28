@@ -5,45 +5,26 @@ import org.javacord.api.entity.message.embed.EmbedBuilder;
 
 /**
  * Gets the current time on google.
- * 
+ *
  * @author Callum Adair
  * @version 0.1
  */
 public class Time {
-    private DiscordApi api;
     private Bot bot;
 
     /**
      * Creates a new instance of the class with the specified api and bot.
-     * 
-     * @param api the specified api.
+     *
      * @param bot the specified bot.
      */
-    public Time(DiscordApi api, Bot bot) {
-        setApi(api);
+    public Time(Bot bot) {
         setBot(bot);
     }
 
-    /**
-     * Changes the api to the one specified.
-     * 
-     * @param api the specified api.
-     */
-    private void setApi(DiscordApi api) {
-        this.api = api;
-    }
-
-    /**
-     * 
-     * @return returns the current api.
-     */
-    public DiscordApi getApi() {
-        return api;
-    }
 
     /**
      * Changes the bot to the one specified.
-     * 
+     *
      * @param bot the specified bot.
      */
     private void setBot(Bot bot) {
@@ -51,7 +32,6 @@ public class Time {
     }
 
     /**
-     * 
      * @return returns the current bot.
      */
     public Bot getBot() {
@@ -69,7 +49,7 @@ public class Time {
      * Gets the current time in an embed.
      */
     private void getTime() {
-        api.addMessageCreateListener(event -> {
+        bot.getApi().addMessageCreateListener(event -> {
             if (event.getMessageContent().equalsIgnoreCase(bot.getPrefix() + "time")) {
                 EmbedBuilder embed = new EmbedBuilder();
                 embed.setTitle("Time").setColor(bot.getRoleColour()).setUrl(
