@@ -1,2 +1,2 @@
 # Colossus
- A simple discord bot using Javacord
+ A simple discord bot using the Javacord library.
