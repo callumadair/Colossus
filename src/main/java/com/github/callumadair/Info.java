@@ -42,7 +42,7 @@ public class Info extends BotAction {
      * @param event the specified event.
      */
     private void botInfo(MessageCreateEvent event) {
-        if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "binfo")) {
+        if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "botinfo")) {
             EmbedBuilder botInfo = new EmbedBuilder();
             User colossus = getBot().getApi().getYourself();
 
@@ -60,7 +60,7 @@ public class Info extends BotAction {
      * @param event the specified event
      */
     private void serverInfo(MessageCreateEvent event) {
-        if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "sinfo")) {
+        if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "serverinfo")) {
             EmbedBuilder serverInfo = new EmbedBuilder();
             Server server = event.getServer().orElse(null);
 

@@ -1,7 +1,5 @@
 package com.github.callumadair;
 
-import org.javacord.api.DiscordApi;
-
 /**
  * A class for finding the latency of the application.
  *
