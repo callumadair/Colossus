@@ -1,8 +1,7 @@
 package com.github.callumadair;
 
-import java.util.List;
+import java.util.*;
 
-import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.permission.PermissionType;
 import org.javacord.api.entity.permission.Permissions;
@@ -48,7 +47,7 @@ public class Invites extends BotAction{
      */
     private void createServerInvite(MessageCreateEvent event) {
 
-        if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "sinvite")) {
+        if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "serverinvite")) {
             event.getChannel().sendMessage(buildServerInvite(event));
         }
 
@@ -77,13 +76,13 @@ public class Invites extends BotAction{
      * @return returns an embed builder with a server invite.
      */
     private EmbedBuilder buildServerInvite(MessageCreateEvent event) {
-        InviteBuilder inviteBuilder = new InviteBuilder(event.getChannel().asServerChannel().get());
+        InviteBuilder inviteBuilder = new InviteBuilder(event.getChannel().asServerChannel().orElse(null));
         Invite invite = inviteBuilder.create().join();
 
         EmbedBuilder serverInvite = new EmbedBuilder();
-        serverInvite.setTitle("Invite to " + event.getServer().get().getName()).setFooter("Made by Cal")
-                .setUrl(invite.getUrl().toString()).setTimestampToNow().setAuthor(event.getMessageAuthor())
-                .setColor(getBot().getRoleColour());
+        serverInvite.setTitle("Invite to " + Objects.requireNonNull(event.getServer().orElse(null)).getName())
+                .setFooter("Made by Cal").setUrl(invite.getUrl().toString()).setTimestampToNow()
+                .setAuthor(event.getMessageAuthor()).setColor(getBot().getRoleColour());
         return serverInvite;
     }
 
@@ -93,7 +92,7 @@ public class Invites extends BotAction{
      * @param event the specified event.
      */
     private void createBotInvite(MessageCreateEvent event) {
-        if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "binvite")) {
+        if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "botinvite")) {
             event.getChannel().sendMessage(buildBotInvite(event));
         }
     }
