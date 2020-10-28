@@ -104,7 +104,7 @@ public class Bot {
         com.github.callumadair.RoleManagement roleManager = new com.github.callumadair.RoleManagement(api, this);
         roleManager.listener();
 
-        com.github.callumadair.BotSetup setup = new com.github.callumadair.BotSetup(api, this);
+        com.github.callumadair.BotSetup setup = new com.github.callumadair.BotSetup(this);
         setup.listener();
 
         com.github.callumadair.FungWah fung = new com.github.callumadair.FungWah(api, this);

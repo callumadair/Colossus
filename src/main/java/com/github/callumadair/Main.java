@@ -6,7 +6,7 @@ import org.javacord.api.entity.permission.*;
 import java.awt.*;
 
 /**
- * Hello world!
+ * Runs the Bot.
  */
 public class Main {
     public static void main(String[] args) {
