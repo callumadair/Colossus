@@ -62,16 +62,19 @@ public class Info extends BotAction {
     private void serverInfo(MessageCreateEvent event) {
         if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "sinfo")) {
             EmbedBuilder serverInfo = new EmbedBuilder();
-            Server server = event.getServer().get();
+            Server server = event.getServer().orElse(null);
 
+            assert server != null;
             serverInfo.setTitle("Server Info").setColor(getBot().getRoleColour()).setDescription(server.getName())
-                    .addField("Members",
-                            ":two_men_holding_hands: " + server.getMemberCount() + " members (:robot: "
-                                    + getBotCount(server) + " bots), " + getOnlineUsers(server) + " online.")
-                    .addField("Channels",
-                            (server.getChannels().size() - server.getChannelCategories().size()) + " channels")
-                    .addField("Owner", server.getOwner().get().getMentionTag()).addField("Creation Date",
-                    server.getCreationTimestamp().truncatedTo(ChronoUnit.MINUTES).toString());
+                    .addField("Members", ":two_men_holding_hands: " + server.getMemberCount()
+                            + " members (:robot: " + getBotCount(server) + " bots), " + getOnlineUsers(server)
+                            + " online.")
+                    .addField("Channels", (server.getChannels().size()
+                            - server.getChannelCategories().size()) + " channels")
+                    .addField("Owner",
+                            Objects.requireNonNull(server.getOwner().orElse(null)).getMentionTag())
+                    .addField("Creation Date",
+                            server.getCreationTimestamp().truncatedTo(ChronoUnit.MINUTES).toString());
 
             event.getChannel().sendMessage(serverInfo);
         }

@@ -1,6 +1,5 @@
 package com.github.callumadair;
 
-import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
 /**
