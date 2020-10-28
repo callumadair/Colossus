@@ -13,7 +13,6 @@ import java.util.*;
  * @version 0.2
  */
 class Bot {
-    private String commandPrefix;
     private Color roleColour;
     private DiscordApi api;
 
@@ -21,13 +20,11 @@ class Bot {
      * Specifies the api, command prefix and role colour.
      *
      * @param api           the api for the bot to use.
-     * @param commandPrefix the prefix for the bot to use.
      * @param roleColour    the colour of the bot in the discord server to be set on
      *                      join.
      */
-    public Bot(DiscordApi api, String commandPrefix, Color roleColour) {
+    public Bot(DiscordApi api, Color roleColour) {
         setApi(api);
-        setPrefix(commandPrefix);
         setColour(roleColour);
 
     }
@@ -48,21 +45,6 @@ class Bot {
         return api;
     }
 
-    /**
-     * Changes the command prefix to the specified string.
-     *
-     * @param commandPrefix the specified string.
-     */
-    private void setPrefix(String commandPrefix) {
-        this.commandPrefix = commandPrefix;
-    }
-
-    /**
-     * @return returns the current command prefix.
-     */
-    public String getPrefix() {
-        return commandPrefix;
-    }
 
     /**
      * Sets the colour of the bot's role to the one specified.
@@ -101,4 +83,13 @@ class Bot {
         }
     }
 
+}
+
+enum Prefix {
+    PREFIX("!");
+    String prefix;
+
+    Prefix(String prefix) {
+        this.prefix = prefix;
+    }
 }
