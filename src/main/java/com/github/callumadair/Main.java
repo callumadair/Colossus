@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         String token = "";
 
-        DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
+        DiscordApi api = new DiscordApiBuilder().setToken(Token.TOKEN.token).login().join();
 
         PermissionsBuilder colossusPermsBuilder = new PermissionsBuilder();
         colossusPermsBuilder.setAllowed(PermissionType.ADMINISTRATOR);
