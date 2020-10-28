@@ -1,6 +1,5 @@
 package com.github.callumadair;
 
-import org.javacord.api.*;
 import org.javacord.api.entity.message.embed.*;
 import org.javacord.api.entity.server.*;
 import org.javacord.api.entity.user.*;
@@ -49,7 +48,7 @@ public class Info extends BotAction {
 
             botInfo.setTitle("Bot Info").setColor(getBot().getRoleColour()).setDescription(getBot().getApi()
                     .getYourself().getName()).addField("Servers", ":robot: " + colossus.getName()
-                    + " is present in " + Integer.toString(colossus.getMutualServers().size()) + " servers");
+                    + " is present in " + (colossus.getMutualServers().size()) + " servers");
 
             event.getChannel().sendMessage(botInfo);
         }
@@ -67,8 +66,8 @@ public class Info extends BotAction {
 
             serverInfo.setTitle("Server Info").setColor(getBot().getRoleColour()).setDescription(server.getName())
                     .addField("Members",
-                            ":two_men_holding_hands: " + Integer.toString(server.getMemberCount()) + " members (:robot: "
-                                    + Integer.toString(getBotCount(server)) + " bots), " + getOnlineUsers(server) + " online.")
+                            ":two_men_holding_hands: " + server.getMemberCount() + " members (:robot: "
+                                    + getBotCount(server) + " bots), " + getOnlineUsers(server) + " online.")
                     .addField("Channels",
                             (server.getChannels().size() - server.getChannelCategories().size()) + " channels")
                     .addField("Owner", server.getOwner().get().getMentionTag()).addField("Creation Date",

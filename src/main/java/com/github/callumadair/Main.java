@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public class Main {
     public static void main(String[] args) {
-        String token = "";
+        //String token = "";
 
         DiscordApi api = new DiscordApiBuilder().setToken(Token.TOKEN.token).login().join();
 

@@ -1,6 +1,5 @@
 package com.github.callumadair;
 
-import org.javacord.api.*;
 import org.javacord.api.entity.message.embed.*;
 
 import java.awt.*;

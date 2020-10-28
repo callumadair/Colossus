@@ -9,7 +9,7 @@ import java.awt.*;
  * functionality.
  * 
  * @author Callum Adair
- * @version 0.1
+ * @version 0.2
  */
 public class Bot {
     private String commandPrefix;
@@ -17,7 +17,7 @@ public class Bot {
     private DiscordApi api;
 
     /**
-     * Specifies the api, command prefix and rolecolour.
+     * Specifies the api, command prefix and role colour.
      * 
      * @param api           the api for the bot to use.
      * @param commandPrefix the prefix for the bot to use.

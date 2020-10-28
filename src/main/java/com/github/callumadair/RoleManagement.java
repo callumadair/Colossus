@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.permission.PermissionType;
 import org.javacord.api.entity.permission.Permissions;
@@ -72,7 +71,7 @@ public class RoleManagement extends BotAction {
                 StringBuilder roles = new StringBuilder();
                 for (Role role : newRoles) {
                     user.addRole(role);
-                    roles.append(role.getMentionTag() + "\n");
+                    roles.append(role.getMentionTag()).append("\n");
                 }
 
                 roleMessage.setDescription(user.getMentionTag() + " now has the following roles:\n" + roles.toString());
@@ -97,7 +96,7 @@ public class RoleManagement extends BotAction {
             StringBuilder autoRoleAlert = new StringBuilder();
             autoRoleAlert.append("The following roles are now added on join:\n");
             for (Role role : autoRoles) {
-                autoRoleAlert.append(role.getMentionTag() + "\n");
+                autoRoleAlert.append(role.getMentionTag()).append("\n");
             }
             autoRoleMessage.setDescription(autoRoleAlert.toString());
             event.getChannel().sendMessage(autoRoleMessage);
@@ -138,7 +137,7 @@ public class RoleManagement extends BotAction {
                 StringBuilder roles = new StringBuilder();
                 for (Role role : oldRoles) {
                     user.removeRole(role);
-                    roles.append(role.getMentionTag() + "\n");
+                    roles.append(role.getMentionTag()).append("\n");
                 }
 
                 roleRemoveMessage.setDescription(
@@ -222,19 +221,7 @@ public class RoleManagement extends BotAction {
         }
 
     }
-
-    /**
-     * Checks if the specified role is a "moderator" role.
-     *
-     * @param role the specified role.
-     * @return returns true if the role is a moderator role.
-     */
-    public boolean isMod(Role role) {
-        if (moderatorRoles.contains(role)) {
-            return true;
-        } else
-            return false;
-    }
+    
 
     /**
      * Creates a muted role, an ordinary member role and updates the permissions of

@@ -35,7 +35,8 @@ public class Time extends BotAction {
             if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "time")) {
                 EmbedBuilder embed = new EmbedBuilder();
                 embed.setTitle("Time").setColor(getBot().getRoleColour()).setUrl(
-                        "https://www.google.com/search?q=time&rlz=1C1CHBD_en-GBGB828GB828&oq=time&aqs=chrome.0.69i59l3j69i60l2j69i61j69i65j69i60.638j0j7&sourceid=chrome&ie=UTF-8");
+                        "https://www.google.com/search?q=time&rlz=1C1CHBD_en-GBGB828GB828&oq=time&aqs=chrome" +
+                                ".0.69i59l3j69i60l2j69i61j69i65j69i60.638j0j7&sourceid=chrome&ie=UTF-8");
                 event.getChannel().sendMessage(embed);
             }
         });

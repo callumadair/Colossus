@@ -7,7 +7,7 @@ public abstract class BotAction {
     private Bot bot;
 
     /**
-     * Instantiates a new Command.
+     * Instantiates a new BotAction.
      *
      * @param bot the specified bot
      */
@@ -16,12 +16,21 @@ public abstract class BotAction {
     }
 
     /**
-     * Listener.
+     * Listener method for commands.
      */
     public abstract void listener();
 
     /**
-     * Gets bot.
+     * Sets the bot to the one specified.
+     *
+     * @param bot the bot
+     */
+    public void setBot(Bot bot) {
+        this.bot = bot;
+    }
+
+    /**
+     * Gets the bot.
      *
      * @return the bot
      */
@@ -29,12 +38,5 @@ public abstract class BotAction {
         return bot;
     }
 
-    /**
-     * Sets bot.
-     *
-     * @param bot the bot
-     */
-    public void setBot(Bot bot) {
-        this.bot = bot;
-    }
+
 }
