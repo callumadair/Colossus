@@ -19,7 +19,7 @@ public class Main {
         Permissions colossusPerms = colossusPermsBuilder.build();
 
         System.out.println("You can invite the bot by using the following url: " + api.createBotInvite(colossusPerms));
-        Bot colossus = new Bot(api, "!", Color.CYAN);
+        Bot colossus = new Bot(api, Color.CYAN);
         colossus.listener();
     }
 
