@@ -13,10 +13,15 @@ import java.util.*;
  * Allows the collection of information on a variety of different applications.
  *
  * @author Callum Adair
- * @version 0.1
+ * @version 0.2
  */
 public class Info extends BotAction {
 
+    /**
+     * Instantiates a new Info with the specified bot.
+     *
+     * @param bot the specified bot
+     */
     public Info(Bot bot) {
         super(bot);
     }
@@ -62,8 +67,8 @@ public class Info extends BotAction {
 
             serverInfo.setTitle("Server Info").setColor(getBot().getRoleColour()).setDescription(server.getName())
                     .addField("Members",
-                    ":two_men_holding_hands: " + Integer.toString(server.getMemberCount()) + " members (:robot: "
-                            + Integer.toString(getBotCount(server)) + " bots), " + getOnlineUsers(server) + " online.")
+                            ":two_men_holding_hands: " + Integer.toString(server.getMemberCount()) + " members (:robot: "
+                                    + Integer.toString(getBotCount(server)) + " bots), " + getOnlineUsers(server) + " online.")
                     .addField("Channels",
                             (server.getChannels().size() - server.getChannelCategories().size()) + " channels")
                     .addField("Owner", server.getOwner().get().getMentionTag()).addField("Creation Date",

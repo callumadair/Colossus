@@ -6,12 +6,12 @@ import org.javacord.api.DiscordApi;
  * A class for finding the latency of the application.
  *
  * @author Callum Adair
- * @version 1.0
+ * @version 1.1
  */
 public class Pong extends BotAction{
 
     /**
-     * Creates a new instance of the class using the specified api and bot.
+     * Creates a new instance of the class using the specified bot.
      *
      * @param bot the specified bot.
      */

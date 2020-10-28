@@ -19,44 +19,28 @@ import org.javacord.api.event.message.MessageCreateEvent;
  * A class for managing roles in a discord server.
  *
  * @author Callum Adair
- * @version 0.1
+ * @version 0.2
  */
-public class RoleManagement {
+public class RoleManagement extends BotAction {
     private static List<Role> moderatorRoles;
-    private static Role muted, member, everyone;
-    private Bot bot;
+    private static Role muted;
+    private static Role member;
+    private static Role everyone;
 
     /**
-     * Creates a new instance of the class with the specified api and bot.
+     * Creates a new instance of the class with the specified bot.
      *
      * @param bot the specified bot.
      */
     public RoleManagement(Bot bot) {
-        setBot(bot);
-
-    }
-
-    /**
-     * Changes the bot to the one specified.
-     *
-     * @param bot the specified bot.
-     */
-    private void setBot(Bot bot) {
-        this.bot = bot;
-    }
-
-    /**
-     * @return returns the current bot.
-     */
-    public Bot getBot() {
-        return bot;
+        super(bot);
     }
 
     /**
      * Implements the methods of the class.
      */
     public void listener() {
-        bot.getApi().addMessageCreateListener(event -> {
+        getBot().getApi().addMessageCreateListener(event -> {
             addRole(event);
             autoRole(event);
             removeRole(event);
@@ -76,7 +60,7 @@ public class RoleManagement {
      */
     private void addRole(MessageCreateEvent event) {
 
-        if (event.getMessageContent().toLowerCase().contains(bot.getPrefix() + "addrole")
+        if (event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "addrole")
                 && event.getMessageAuthor().canManageRolesOnServer()) {
             List<User> newUsers = event.getMessage().getMentionedUsers();
             List<Role> newRoles = event.getMessage().getMentionedRoles();
@@ -105,7 +89,7 @@ public class RoleManagement {
      */
     private void autoRole(MessageCreateEvent event) {
         if (event.getMessageAuthor().isServerAdmin()
-                && event.getMessageContent().toLowerCase().contains(bot.getPrefix() + "autorole")) {
+                && event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "autorole")) {
             List<Role> autoRoles = event.getMessage().getMentionedRoles();
             EmbedBuilder autoRoleMessage = new EmbedBuilder();
             autoRoleMessage.setTitle("Auto role notification").setColor(Color.CYAN);
@@ -128,7 +112,7 @@ public class RoleManagement {
      * @param autoRoles the specified list of roles.
      */
     private void autoRole(List<Role> autoRoles) {
-        bot.getApi().addServerMemberJoinListener(listen -> {
+        getBot().getApi().addServerMemberJoinListener(listen -> {
 
             for (Role role : autoRoles) {
                 listen.getUser().addRole(role);
@@ -142,7 +126,7 @@ public class RoleManagement {
      * @param event the specified event.
      */
     private void removeRole(MessageCreateEvent event) {
-        if (event.getMessageContent().toLowerCase().contains(bot.getPrefix() + "removerole")
+        if (event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "removerole")
                 && event.getMessageAuthor().canManageRolesOnServer()) {
             List<User> oldUsers = event.getMessage().getMentionedUsers();
             List<Role> oldRoles = event.getMessage().getMentionedRoles();
@@ -172,7 +156,7 @@ public class RoleManagement {
      */
     public void clearRoles(MessageCreateEvent event) {
         if (event.getMessageAuthor().isBotOwner()
-                && event.getMessageContent().equalsIgnoreCase(bot.getPrefix() + "clearroles")) {
+                && event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "clearroles")) {
             List<Role> allRoles = event.getServer().get().getRoles();
 
             for (Role role : allRoles) {
@@ -194,7 +178,7 @@ public class RoleManagement {
     private void createAdminRole(MessageCreateEvent event) {
 
         if ((event.getMessageAuthor().isServerAdmin())
-                && (event.getMessageContent().toLowerCase().contains(bot.getPrefix() + "createadminrole"))) {
+                && (event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "createadminrole"))) {
 
             RoleBuilder newRole = event.getServer().get().createRoleBuilder();
             newRole.setName("Admin").setColor(Color.GREEN);
@@ -223,7 +207,7 @@ public class RoleManagement {
     private void setModRole(MessageCreateEvent event) {
 
         if (event.getMessageAuthor().isServerAdmin()
-                && event.getMessageContent().toLowerCase().contains(bot.getPrefix() + "setmod")) {
+                && event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "setmod")) {
             PermissionsBuilder modPerms = new PermissionsBuilder();
             modPerms.setAllowed(PermissionType.BAN_MEMBERS, PermissionType.DEAFEN_MEMBERS, PermissionType.KICK_MEMBERS,
                     PermissionType.MANAGE_ROLES, PermissionType.MUTE_MEMBERS, PermissionType.VIEW_AUDIT_LOG);
@@ -261,7 +245,7 @@ public class RoleManagement {
     private void createMutedRole(MessageCreateEvent event) {
 
         if (event.getMessageAuthor().isServerAdmin()
-                && event.getMessageContent().toLowerCase().contains(bot.getPrefix() + "createmutedrole")) {
+                && event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "createmutedrole")) {
 
             PermissionsBuilder mutedPerms = new PermissionsBuilder();
             mutedPerms.setDenied(PermissionType.SEND_MESSAGES, PermissionType.SPEAK, PermissionType.STREAM);
@@ -310,7 +294,7 @@ public class RoleManagement {
      */
     private void muteUser(MessageCreateEvent event) {
         if (event.getMessageAuthor().isServerAdmin()
-                && event.getMessageContent().toLowerCase().contains(bot.getPrefix() + "mute")) {
+                && event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "mute")) {
             List<User> newMutes = event.getMessage().getMentionedUsers();
             for (User user : newMutes) {
                 user.addRole(muted);
@@ -323,7 +307,7 @@ public class RoleManagement {
             }
         }
         if (event.getMessageAuthor().isServerAdmin()
-                && event.getMessageContent().toLowerCase().contains(bot.getPrefix() + "unmute")) {
+                && event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "unmute")) {
             List<User> newUnmutes = event.getMessage().getMentionedUsers();
             for (User user : newUnmutes) {
                 user.addRole(member);
@@ -343,7 +327,7 @@ public class RoleManagement {
      * @param event the specified event.
      */
     private void roles(MessageCreateEvent event) {
-        if (event.getMessageContent().equalsIgnoreCase(bot.getPrefix() + "roles")) {
+        if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "roles")) {
             List<Role> allRoles = event.getServer().get().getRoles();
             StringBuilder roleMentions = new StringBuilder();
             for (Role role : allRoles) {
@@ -351,7 +335,7 @@ public class RoleManagement {
             }
 
             EmbedBuilder embed = new EmbedBuilder();
-            embed.setColor(bot.getRoleColour()).setTitle("Roles in this server:")
+            embed.setColor(getBot().getRoleColour()).setTitle("Roles in this server:")
                     .setDescription(roleMentions.toString());
             event.getChannel().sendMessage(embed);
         }

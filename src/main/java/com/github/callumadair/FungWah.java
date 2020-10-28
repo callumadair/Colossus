@@ -9,7 +9,7 @@ import java.awt.*;
  * A special class for Fung Wah.
  *
  * @author Callum Adair
- * @version 0.1
+ * @version 0.2
  */
 public class FungWah extends BotAction{
 
