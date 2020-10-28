@@ -8,7 +8,7 @@ import org.javacord.api.entity.message.embed.EmbedBuilder;
  * @author Callum Adair
  * @version 0.2
  */
-public class Time extends BotAction {
+class Time extends BotAction {
 
     /**
      * Creates a new instance of the class with the specified bot.

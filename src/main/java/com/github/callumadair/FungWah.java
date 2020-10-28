@@ -10,7 +10,7 @@ import java.awt.*;
  * @author Callum Adair
  * @version 0.2
  */
-public class FungWah extends BotAction{
+class FungWah extends BotAction{
 
     /**
      * Creates a new instance of Fung Wah with the specified api and bot.

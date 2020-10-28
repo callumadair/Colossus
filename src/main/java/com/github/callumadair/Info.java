@@ -14,7 +14,7 @@ import java.util.*;
  * @author Callum Adair
  * @version 0.2
  */
-public class Info extends BotAction {
+class Info extends BotAction {
 
     /**
      * Instantiates a new Info with the specified bot.

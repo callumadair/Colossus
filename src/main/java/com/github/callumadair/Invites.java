@@ -17,7 +17,7 @@ import org.javacord.api.event.message.MessageCreateEvent;
  * @author Callum Adair
  * @version 0.5
  */
-public class Invites extends BotAction{
+class Invites extends BotAction{
 
     /**
      * Creates a new instance of the invite class with the specified api and bot.

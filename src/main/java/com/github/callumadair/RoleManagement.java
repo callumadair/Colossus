@@ -18,7 +18,7 @@ import org.javacord.api.event.message.MessageCreateEvent;
  * @author Callum Adair
  * @version 0.2
  */
-public class RoleManagement extends BotAction {
+class RoleManagement extends BotAction {
     private static Role muted;
     private static Role member;
 

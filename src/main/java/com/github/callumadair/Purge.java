@@ -13,7 +13,7 @@ import org.javacord.api.entity.message.MessageSet;
  * @author Callum Adair
  * @version 0.2
  */
-public class Purge extends BotAction {
+class Purge extends BotAction {
 
     /**
      * Creates a new instance of the class with the specified bot.

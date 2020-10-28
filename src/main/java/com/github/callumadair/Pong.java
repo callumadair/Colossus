@@ -6,7 +6,7 @@ package com.github.callumadair;
  * @author Callum Adair
  * @version 1.1
  */
-public class Pong extends BotAction{
+class Pong extends BotAction{
 
     /**
      * Creates a new instance of the class using the specified bot.
