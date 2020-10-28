@@ -9,7 +9,7 @@ import org.javacord.api.entity.user.User;
  * Implements the configuration of a bot on using a specified api.
  *
  * @author Callum Adair
- * @version 0.1
+ * @version 0.2
  */
 public class BotSetup {
     private Bot bot;
