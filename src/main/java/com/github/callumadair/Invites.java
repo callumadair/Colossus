@@ -18,8 +18,7 @@ import org.javacord.api.event.message.MessageCreateEvent;
  * @author Callum Adair
  * @version 0.5
  */
-public class Invites {
-    private Bot bot;
+public class Invites extends BotAction{
 
     /**
      * Creates a new instance of the invite class with the specified api and bot.
@@ -27,33 +26,14 @@ public class Invites {
      * @param bot the specified bot.
      */
     public Invites(Bot bot) {
-        setBot(bot);
-    }
-
-
-
-    /**
-     * Changes the bot to the one specified.
-     * 
-     * @param bot the specified bot.
-     */
-    private void setBot(Bot bot) {
-        this.bot = bot;
-    }
-
-    /**
-     * 
-     * @return returns the current bot.
-     */
-    public Bot getBot() {
-        return bot;
+        super(bot);
     }
 
     /**
      * Implements the methods of the class.
      */
     public void listener() {
-        bot.getApi().addMessageCreateListener(event -> {
+        getBot().getApi().addMessageCreateListener(event -> {
             createServerInvite(event);
             createBotInvite(event);
             sendServerInvite(event);
@@ -68,7 +48,7 @@ public class Invites {
      */
     private void createServerInvite(MessageCreateEvent event) {
 
-        if (event.getMessageContent().equalsIgnoreCase(bot.getPrefix() + "sinvite")) {
+        if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "sinvite")) {
             event.getChannel().sendMessage(buildServerInvite(event));
         }
 
@@ -81,7 +61,7 @@ public class Invites {
      * @param event the specified event.
      */
     private void sendServerInvite(MessageCreateEvent event) {
-        if (event.getMessageContent().toLowerCase().contains(bot.getPrefix() + "sendserverinvite")) {
+        if (event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "sendserverinvite")) {
             List<User> users = event.getMessage().getMentionedUsers();
             for (User user : users) {
                 user.sendMessage(buildServerInvite(event));
@@ -91,7 +71,7 @@ public class Invites {
 
     /**
      * Creates an embed builder containing a server invite for the server the
-     * specified event occured in.
+     * specified event occurred in.
      * 
      * @param event the specified event.
      * @return returns an embed builder with a server invite.
@@ -103,7 +83,7 @@ public class Invites {
         EmbedBuilder serverInvite = new EmbedBuilder();
         serverInvite.setTitle("Invite to " + event.getServer().get().getName()).setFooter("Made by Cal")
                 .setUrl(invite.getUrl().toString()).setTimestampToNow().setAuthor(event.getMessageAuthor())
-                .setColor(bot.getRoleColour());
+                .setColor(getBot().getRoleColour());
         return serverInvite;
     }
 
@@ -113,7 +93,7 @@ public class Invites {
      * @param event the specified event.
      */
     private void createBotInvite(MessageCreateEvent event) {
-        if (event.getMessageContent().equalsIgnoreCase(bot.getPrefix() + "binvite")) {
+        if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "binvite")) {
             event.getChannel().sendMessage(buildBotInvite(event));
         }
     }
@@ -125,7 +105,7 @@ public class Invites {
      * @param event the specified event.
      */
     private void sendBotInvite(MessageCreateEvent event) {
-        if (event.getMessageContent().toLowerCase().contains(bot.getPrefix() + "sendbotinvite")) {
+        if (event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "sendbotinvite")) {
             List<User> users = event.getMessage().getMentionedUsers();
             for (User user : users) {
                 user.sendMessage(buildBotInvite(event));
@@ -145,9 +125,9 @@ public class Invites {
         Permissions colossusPerms = colossusPermsBuilder.build();
 
         EmbedBuilder botInvite = new EmbedBuilder();
-        botInvite.setTitle("Invite Colossus here!").setUrl(bot.getApi().createBotInvite(colossusPerms))
+        botInvite.setTitle("Invite Colossus here!").setUrl(getBot().getApi().createBotInvite(colossusPerms))
                 .setAuthor(event.getMessageAuthor()).setFooter("Made by Cal").setTimestampToNow()
-                .setColor(bot.getRoleColour());
+                .setColor(getBot().getRoleColour());
         return botInvite;
     }
 
