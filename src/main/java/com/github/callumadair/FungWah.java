@@ -35,7 +35,7 @@ class FungWah extends BotAction{
     private void bully() {
         getBot().getApi().addMessageCreateListener(event -> {
             if (event.getMessageAuthor().isBotOwner()
-                    && event.getMessageContent().equalsIgnoreCase(Prefix.PREFIX.prefix + "fungwah")) {
+                    && event.getMessageContent().equalsIgnoreCase(getBot().getPrefix()+ "fungwah")) {
                 EmbedBuilder fungWah = new EmbedBuilder();
                 fungWah.setTitle("Look at this Fung Wah").setDescription("Pretty neat, huh?").setColor(Color.CYAN);
                 event.getChannel().sendMessage(fungWah);

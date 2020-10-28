@@ -15,18 +15,18 @@ import java.util.*;
 class Bot {
     private Color roleColour;
     private DiscordApi api;
+    private String prefix;
 
     /**
      * Specifies the api, command prefix and role colour.
      *
-     * @param api           the api for the bot to use.
-     * @param roleColour    the colour of the bot in the discord server to be set on
-     *                      join.
+     * @param api        the api for the bot to use.
+     * @param roleColour the colour of the bot in the discord server to be set on
+     *                   join.
      */
     public Bot(DiscordApi api, Color roleColour) {
         setApi(api);
         setColour(roleColour);
-
     }
 
     /**
@@ -45,6 +45,16 @@ class Bot {
         return api;
     }
 
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    public String getPrefix() {
+        if (prefix != null) {
+            return this.prefix;
+        }
+        return Values.DEFAULT_PREFIX.value;
+    }
 
     /**
      * Sets the colour of the bot's role to the one specified.
@@ -85,11 +95,11 @@ class Bot {
 
 }
 
-enum Prefix {
-    PREFIX("!");
-    String prefix;
+enum Values {
+    DEFAULT_PREFIX("!");
+    String value;
 
-    Prefix(String prefix) {
-        this.prefix = prefix;
+    Values(String value) {
+        this.value = value;
     }
 }
