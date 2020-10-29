@@ -1,12 +1,11 @@
 package com.github.callumadair.management;
 
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 
 import com.github.callumadair.Bot.*;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageSet;
+import org.javacord.api.event.message.*;
 
 /**
  * A class for mass deletion of messages in a discord server.
@@ -29,34 +28,38 @@ public class Purge extends BotAction {
      * Implements the methods of the class.
      */
     public void start() {
-        purgeMessages();
+        getBot().getApi().addMessageCreateListener(event -> {
+            if (bot.isBotModerator(Objects.requireNonNull(event.getMessageAuthor().asUser().orElse(null)),
+                    event.getServer().orElse(null))) {
+                if (event.getMessageContent().split(" ")[0]
+                        .equalsIgnoreCase(getBot().getPrefix() + "purge")) {
+                    purgeMessages(event);
+                }
+            }
+        });
+
     }
 
     /**
      * Deletes the specified number of starting from the most recent.
      */
-    private void purgeMessages() {
-        getBot().getApi().addMessageCreateListener(event -> {
-            try {
-                if (event.getMessageAuthor().isServerAdmin()
-                        && event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "purge")) {
-                    Scanner in = new Scanner(event.getMessageContent());
-                    in.next();
-                    int numOfMessages = in.nextInt() + 1;
+    private void purgeMessages(MessageCreateEvent event) {
+        try {
+            Scanner in = new Scanner(event.getMessageContent());
+            in.next();
+            int numOfMessages = in.nextInt() + 1;
 
-                    MessageSet messages = event.getChannel().getMessages(numOfMessages).join();
-                    for (Message message : messages) {
-                        message.delete();
-                    }
-                    in.close();
-                }
-            } catch (InputMismatchException e) {
-                event.getChannel().sendMessage("Please try again with a whole number.");
-            } catch (NoSuchElementException e) {
-                event.getChannel().sendMessage("Please specify a number of messages.");
+            MessageSet messages = event.getChannel().getMessages(numOfMessages).join();
+            for (Message message : messages) {
+                message.delete();
             }
+            in.close();
+        } catch (InputMismatchException e) {
+            event.getChannel().sendMessage("Please try again with a whole number.");
+        } catch (NoSuchElementException e) {
+            event.getChannel().sendMessage("Please specify a number of messages.");
+        }
 
-        });
 
     }
 }

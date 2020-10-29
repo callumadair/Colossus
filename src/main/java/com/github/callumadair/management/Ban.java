@@ -22,7 +22,8 @@ public class Ban extends BotAction {
     public void start() {
         getBot().getApi().addMessageCreateListener(event -> {
             if (bot.isBotModerator(Objects.requireNonNull(event.getMessageAuthor().asUser().orElse(null)),
-                    event.getServer().orElse(null))) {
+                    event.getServer().orElse(null))
+                    && event.getMessageContent().split(" ")[0].equalsIgnoreCase(getBot().getPrefix() + "ban")) {
                 banByMention(event);
                 banByID(event);
             }
