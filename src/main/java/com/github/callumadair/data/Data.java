@@ -4,6 +4,9 @@ import com.github.callumadair.Bot.*;
 
 import java.util.*;
 
+/**
+ * The type Data.
+ */
 public class Data extends BotAction {
     /**
      * Instantiates a new Data object.
@@ -22,5 +25,9 @@ public class Data extends BotAction {
         dataActions.add(new Invites(getBot()));
         dataActions.add(new Pong(getBot()));
         dataActions.add(new Time(getBot()));
+
+        for (BotAction dataAction : dataActions) {
+            dataAction.start();
+        }
     }
 }

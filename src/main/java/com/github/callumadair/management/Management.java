@@ -4,6 +4,9 @@ import com.github.callumadair.Bot.*;
 
 import java.util.*;
 
+/**
+ * The type Management.
+ */
 public class Management extends BotAction {
 
     /**
