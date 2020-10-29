@@ -1,4 +1,4 @@
-package com.github.callumadair;
+package com.github.callumadair.management;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
