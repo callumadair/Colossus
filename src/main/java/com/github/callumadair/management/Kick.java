@@ -3,6 +3,8 @@ package com.github.callumadair.management;
 import com.github.callumadair.Bot.*;
 import org.javacord.api.event.message.*;
 
+import java.util.*;
+
 /**
  * The type Kick.
  */
@@ -19,12 +21,17 @@ public class Kick extends BotAction {
     @Override
     public void start() {
         getBot().getApi().addMessageCreateListener(event -> {
-            kickByMention(event);
-            kickByID(event);
+            if (bot.isBotModerator(Objects.requireNonNull(event.getMessageAuthor().asUser().orElse(null)),
+                    event.getServer().orElse(null))) {
+                kickByMention(event);
+                kickByID(event);
+            }
         });
     }
+
     private void kickByMention(MessageCreateEvent event) {
     }
+
     private void kickByID(MessageCreateEvent event) {
     }
 
