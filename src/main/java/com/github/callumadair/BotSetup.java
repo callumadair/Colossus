@@ -1,6 +1,5 @@
 package com.github.callumadair;
 
-import org.javacord.api.entity.message.*;
 import org.javacord.api.entity.permission.Role;
 import org.javacord.api.entity.permission.RoleBuilder;
 import org.javacord.api.entity.user.User;
