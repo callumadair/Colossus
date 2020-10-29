@@ -6,7 +6,6 @@ import org.javacord.api.entity.user.*;
 import org.javacord.api.event.message.*;
 
 import java.util.*;
-import java.util.concurrent.*;
 
 /**
  * The type Kick.
