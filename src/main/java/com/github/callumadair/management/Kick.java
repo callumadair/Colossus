@@ -78,7 +78,6 @@ public class Kick extends BotAction {
         } catch (Exception e) {
             event.getChannel().sendMessage(e.getMessage());
         }
-
     }
 
 
