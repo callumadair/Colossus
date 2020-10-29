@@ -1,6 +1,8 @@
 package com.github.callumadair.management;
 
 import com.github.callumadair.Bot.*;
+import org.javacord.api.entity.server.*;
+import org.javacord.api.entity.user.*;
 import org.javacord.api.event.message.*;
 
 import java.util.*;
@@ -33,7 +35,12 @@ public class Ban extends BotAction {
     }
 
     private void banByMention(MessageCreateEvent event) {
-
+        List<User> bans = event.getMessage().getMentionedUsers();
+        Server server = event.getServer().orElse(null);
+        assert server != null;
+        for (User ban : bans) {
+            server.banUser(ban);
+        }
     }
 
     private void banByID(MessageCreateEvent event) {

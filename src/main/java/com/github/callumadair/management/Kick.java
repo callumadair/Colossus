@@ -1,6 +1,8 @@
 package com.github.callumadair.management;
 
 import com.github.callumadair.Bot.*;
+import org.javacord.api.entity.server.*;
+import org.javacord.api.entity.user.*;
 import org.javacord.api.event.message.*;
 
 import java.util.*;
@@ -32,6 +34,12 @@ public class Kick extends BotAction {
     }
 
     private void kickByMention(MessageCreateEvent event) {
+        List<User> kicks = event.getMessage().getMentionedUsers();
+        Server server = event.getServer().orElse(null);
+        assert server != null;
+        for (User kick : kicks) {
+            server.kickUser(kick);
+        }
     }
 
     private void kickByID(MessageCreateEvent event) {
