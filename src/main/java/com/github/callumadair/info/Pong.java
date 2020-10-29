@@ -1,4 +1,4 @@
-package com.github.callumadair;
+package com.github.callumadair.info;
 
 import com.github.callumadair.Bot.*;
 

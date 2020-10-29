@@ -1,14 +1,14 @@
-package com.github.callumadair.MemberManagement;
+package com.github.callumadair.management;
 
 import com.github.callumadair.Bot.*;
 
-public class Ban extends BotAction {
+public class Kick  extends BotAction {
     /**
      * Instantiates a new BotAction.
      *
      * @param bot the specified bot
      */
-    protected Ban(Bot bot) {
+    protected Kick(Bot bot) {
         super(bot);
     }
 

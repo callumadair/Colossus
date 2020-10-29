@@ -1,4 +1,4 @@
-package com.github.callumadair.MemberManagement;
+package com.github.callumadair.management;
 
 import com.github.callumadair.Bot.*;
 
