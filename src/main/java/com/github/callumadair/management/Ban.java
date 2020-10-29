@@ -67,6 +67,19 @@ public class Ban extends BotAction {
         }
     }
 
+    /**
+     * Bans a selected user by their discord ID in the specified event server.
+     *
+     * @param event the specified event.
+     */
     private void banByID(MessageCreateEvent event) {
+        try {
+            long banID = Long.parseLong(event.getMessageContent().split(" ")[1]);
+            User ban = getBot().getApi().getUserById(banID).get();
+            Objects.requireNonNull(event.getServer().orElse(null)).banUser(ban);
+            event.getChannel().sendMessage(banID + " was banned from the server.");
+        } catch (Exception e) {
+            event.getChannel().sendMessage(e.getMessage());
+        }
     }
 }
