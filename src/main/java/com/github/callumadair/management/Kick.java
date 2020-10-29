@@ -6,6 +6,7 @@ import org.javacord.api.entity.user.*;
 import org.javacord.api.event.message.*;
 
 import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * The type Kick.
@@ -64,7 +65,21 @@ public class Kick extends BotAction {
         }
     }
 
+    /**
+     * Kicks the specified user by their discord ID
+     *
+     * @param event the specified event
+     */
     private void kickByID(MessageCreateEvent event) {
+        try {
+            long kickID = Long.parseLong(event.getMessageContent().split(" ")[1]);
+            User kick = getBot().getApi().getUserById(kickID).get();
+            Objects.requireNonNull(event.getServer().orElse(null)).kickUser(kick);
+            event.getChannel().sendMessage(kickID + " was kicked from the server.");
+        } catch (Exception e) {
+            event.getChannel().sendMessage(e.getMessage());
+        }
+
     }
 
 
