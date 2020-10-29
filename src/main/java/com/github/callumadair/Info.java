@@ -92,7 +92,7 @@ class Info extends BotAction {
      * @param server the specified server.
      * @return returns the number of bots in the server.
      */
-    public int getBotCount(Server server) {
+    private int getBotCount(Server server) {
         int botCount = 0;
         Collection<User> serverMembers = server.getMembers();
         for (User user : serverMembers) {
@@ -110,7 +110,7 @@ class Info extends BotAction {
      * @param server the specified server.
      * @return returns the number of online members.
      */
-    public int getOnlineUsers(Server server) {
+    private int getOnlineUsers(Server server) {
         int onlineCount = 0;
         Collection<User> serverMembers = server.getMembers();
         for (User user : serverMembers) {

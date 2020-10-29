@@ -48,7 +48,7 @@ public class BotSetup extends BotAction {
                     PermissionType.MANAGE_MESSAGES);
             moderatorBuilder.setPermissions(permissionsBuilder.build());
             moderatorBuilder.setName("Moderator");
-            Role moderator = moderatorBuilder.create().join();
+            getBot().setModeratorRole(moderatorBuilder.create().join());
         });
     }
 }

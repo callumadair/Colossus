@@ -24,6 +24,10 @@ public class ServerMemberManagement extends BotAction {
         });
     }
 
+    private void actionSpecifiedMembers(MessageCreateEvent event) {
+
+    }
+
     private void kickSpecifiedMembers(MessageCreateEvent event) {
         if (event.getMessageAuthor().canKickUsersFromServer()) {
             List<User> kickUsers = event.getMessage().getMentionedUsers();

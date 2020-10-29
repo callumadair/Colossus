@@ -1,6 +1,7 @@
 package com.github.callumadair;
 
 import org.javacord.api.*;
+import org.javacord.api.entity.permission.*;
 
 import java.awt.*;
 import java.util.*;
@@ -16,6 +17,7 @@ class Bot {
     private Color roleColour;
     private DiscordApi api;
     private String prefix;
+    private Role moderatorRole;
 
     /**
      * Specifies the api, command prefix and role colour.
@@ -93,6 +95,13 @@ class Bot {
         }
     }
 
+    public void setModeratorRole(Role moderatorRole) {
+        this.moderatorRole = moderatorRole;
+    }
+
+    public Role getModeratorRole() {
+        return moderatorRole;
+    }
 }
 
 enum Values {

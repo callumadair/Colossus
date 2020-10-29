@@ -271,7 +271,7 @@ class RoleManagement extends BotAction {
     }
 
     /**
-     * Mute's the mentioned user in the specified event's discord server.
+     * Mutes the mentioned user in the specified event's discord server.
      *
      * @param event the specified event.
      */
