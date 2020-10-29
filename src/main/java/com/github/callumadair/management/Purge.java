@@ -28,7 +28,7 @@ public class Purge extends BotAction {
     /**
      * Implements the methods of the class.
      */
-    public void listener() {
+    public void start() {
         purgeMessages();
     }
 

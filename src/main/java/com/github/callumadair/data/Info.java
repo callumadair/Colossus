@@ -29,7 +29,7 @@ public class Info extends BotAction {
     /**
      * Implements the methods of the Info class.
      */
-    public void listener() {
+    public void start() {
         getBot().getApi().addMessageCreateListener(event -> {
             serverInfo(event);
             botInfo(event);

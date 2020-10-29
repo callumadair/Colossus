@@ -92,7 +92,7 @@ public class Bot {
         botActions.add(new ShutDown(this));
 
         for (BotAction botAction : botActions) {
-            botAction.listener();
+            botAction.start();
         }
     }
 

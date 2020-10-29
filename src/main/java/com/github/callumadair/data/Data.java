@@ -15,7 +15,7 @@ public class Data extends BotAction {
     }
 
     @Override
-    public void listener() {
+    public void start() {
         ArrayList<BotAction> dataActions = new ArrayList<>();
 
         dataActions.add(new Info(getBot()));

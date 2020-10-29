@@ -20,7 +20,7 @@ public abstract class BotAction {
     /**
      * Listener method for commands.
      */
-    public abstract void listener();
+    public abstract void start();
 
     /**
      * Sets the bot to the one specified.

@@ -16,7 +16,7 @@ public class Management extends BotAction {
     }
 
     @Override
-    public void listener() {
+    public void start() {
         ArrayList<BotAction> managementActions = new ArrayList<>();
         managementActions.add(new Kick(getBot()));
         managementActions.add(new Ban(getBot()));
@@ -24,7 +24,7 @@ public class Management extends BotAction {
         managementActions.add(new RoleManagement(getBot()));
 
         for (BotAction action : managementActions) {
-            action.listener();
+            action.start();
         }
     }
 }

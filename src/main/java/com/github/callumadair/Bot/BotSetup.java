@@ -24,7 +24,7 @@ public class BotSetup extends BotAction {
     /**
      * Implements the methods of the setup.
      */
-    public void listener() {
+    public void start() {
         roleSetup();
     }
 

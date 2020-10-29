@@ -32,7 +32,7 @@ public class Invites extends BotAction{
     /**
      * Implements the methods of the class.
      */
-    public void listener() {
+    public void start() {
         getBot().getApi().addMessageCreateListener(event -> {
             createServerInvite(event);
             createBotInvite(event);

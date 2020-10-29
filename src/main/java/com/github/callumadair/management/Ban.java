@@ -13,7 +13,7 @@ public class Ban extends BotAction {
     }
 
     @Override
-    public void listener() {
+    public void start() {
 
     }
 }

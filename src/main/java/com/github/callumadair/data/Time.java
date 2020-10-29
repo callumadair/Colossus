@@ -23,7 +23,7 @@ public class Time extends BotAction {
     /**
      * Implements the methods of the class.
      */
-    public void listener() {
+    public void start() {
         getTime();
     }
 

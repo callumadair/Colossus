@@ -22,7 +22,7 @@ public class Pong extends BotAction{
     /**
      * Implements the methods of the class.
      */
-    public void listener() {
+    public void start() {
         getPing();
     }
 

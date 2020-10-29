@@ -25,7 +25,7 @@ public class FungWah extends BotAction{
     /**
      * Implements the methods of the class.
      */
-    public void listener() {
+    public void start() {
         bully();
     }
 
