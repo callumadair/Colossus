@@ -1,7 +1,7 @@
 package com.github.callumadair.Bot;
 
 import com.github.callumadair.*;
-import com.github.callumadair.info.*;
+import com.github.callumadair.data.*;
 import com.github.callumadair.management.*;
 import org.javacord.api.*;
 import org.javacord.api.entity.permission.*;
@@ -16,7 +16,7 @@ import java.util.*;
  * functionality.
  *
  * @author Callum Adair
- * @version 0.2
+ * @version 0.3
  */
 public class Bot {
     private Color roleColour;
@@ -86,14 +86,10 @@ public class Bot {
         ArrayList<BotAction> botActions = new ArrayList<>();
 
         botActions.add(new BotSetup(this));
+        botActions.add(new Management(this));
+        botActions.add(new Data(this));
         botActions.add(new FungWah(this));
-        botActions.add(new Info(this));
-        botActions.add(new Invites(this));
-        botActions.add(new Pong(this));
-        botActions.add(new Purge(this));
-        botActions.add(new RoleManagement(this));
         botActions.add(new ShutDown(this));
-        botActions.add(new Time(this));
 
         for (BotAction botAction : botActions) {
             botAction.listener();

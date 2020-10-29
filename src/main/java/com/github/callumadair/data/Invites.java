@@ -1,4 +1,4 @@
-package com.github.callumadair.info;
+package com.github.callumadair.data;
 
 import java.util.*;
 

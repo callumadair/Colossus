@@ -4,14 +4,14 @@ import com.github.callumadair.Bot.*;
 
 import java.util.*;
 
-public class ServerManagement extends BotAction {
+public class Management extends BotAction {
 
     /**
      * Instantiates a new ServerManagement object.
      *
      * @param bot the specified bot
      */
-    ServerManagement(Bot bot) {
+    public Management(Bot bot) {
         super(bot);
     }
 
@@ -22,5 +22,9 @@ public class ServerManagement extends BotAction {
         managementActions.add(new Ban(getBot()));
         managementActions.add(new Purge(getBot()));
         managementActions.add(new RoleManagement(getBot()));
+
+        for (BotAction action : managementActions) {
+            action.listener();
+        }
     }
 }
