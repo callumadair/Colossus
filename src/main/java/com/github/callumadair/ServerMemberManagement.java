@@ -3,7 +3,7 @@ package com.github.callumadair;
 public class ServerMemberManagement extends BotAction{
 
     /**
-     * Instantiates a new BotAction.
+     * Instantiates a new ServerManagement object.
      *
      * @param bot the specified bot
      */
