@@ -11,6 +11,8 @@ import java.util.*;
  * The type Ban.
  */
 public class Ban extends BotAction {
+    private final int MESSAGE_DELETE_DEFAULT = 30;
+
     /**
      * Instantiates a new Ban object.
      *
@@ -28,18 +30,40 @@ public class Ban extends BotAction {
                 if (event.getMessageContent().split(" ")[0]
                         .equalsIgnoreCase(getBot().getPrefix() + "ban")) {
                     banByMention(event);
+                    banByMention(event, event.getMessageContent().split(" ")
+                            [event.getMessageContent().split(" ").length - 1]);
                     banByID(event);
                 }
             }
         });
     }
 
+    /**
+     * Bans the mentioned user(s) from the server of the specified event.
+     *
+     * @param event the specified event.
+     */
     private void banByMention(MessageCreateEvent event) {
         List<User> bans = event.getMessage().getMentionedUsers();
         Server server = event.getServer().orElse(null);
         assert server != null;
         for (User ban : bans) {
             server.banUser(ban);
+        }
+    }
+
+    /**
+     * Bans the mentioned user(s) from the server of the specified event.
+     *
+     * @param event  the specified event.
+     * @param reason the reason given for the ban.
+     */
+    private void banByMention(MessageCreateEvent event, String reason) {
+        List<User> bans = event.getMessage().getMentionedUsers();
+        Server server = event.getServer().orElse(null);
+        assert server != null;
+        for (User ban : bans) {
+            server.banUser(ban, MESSAGE_DELETE_DEFAULT, reason);
         }
     }
 
