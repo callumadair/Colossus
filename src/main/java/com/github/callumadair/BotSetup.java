@@ -1,8 +1,9 @@
 package com.github.callumadair;
 
-import org.javacord.api.entity.permission.Role;
-import org.javacord.api.entity.permission.RoleBuilder;
+import org.javacord.api.entity.permission.*;
 import org.javacord.api.entity.user.User;
+
+import java.security.*;
 
 /**
  * Implements the configuration of a bot on using a specified api.
@@ -40,6 +41,14 @@ public class BotSetup extends BotAction {
             Role colour = colourBuilder.create().join();
             colour.addUser(colossus);
 
+            RoleBuilder moderatorBuilder = new RoleBuilder(listener.getServer());
+            PermissionsBuilder permissionsBuilder = new PermissionsBuilder();
+            permissionsBuilder.setAllowed(PermissionType.CHANGE_NICKNAME, PermissionType.DEAFEN_MEMBERS,
+                    PermissionType.MOVE_MEMBERS, PermissionType.MUTE_MEMBERS, PermissionType.MANAGE_ROLES,
+                    PermissionType.MANAGE_MESSAGES);
+            moderatorBuilder.setPermissions(permissionsBuilder.build());
+            moderatorBuilder.setName("Moderator");
+            Role moderator = moderatorBuilder.create().join();
         });
     }
 }
