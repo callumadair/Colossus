@@ -1,9 +1,8 @@
-package com.github.callumadair;
+package com.github.callumadair.Bot;
 
+import com.github.callumadair.Bot.*;
 import org.javacord.api.entity.permission.*;
 import org.javacord.api.entity.user.User;
-
-import java.security.*;
 
 /**
  * Implements the configuration of a bot on using a specified api.

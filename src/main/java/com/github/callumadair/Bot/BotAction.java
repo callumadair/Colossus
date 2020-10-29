@@ -1,17 +1,19 @@
-package com.github.callumadair;
+package com.github.callumadair.Bot;
+
+import com.github.callumadair.Bot.*;
 
 /**
  * The type BotAction, an abstract superclass for all bot actions.
  */
 public abstract class BotAction {
-    private Bot bot;
+    protected Bot bot;
 
     /**
      * Instantiates a new BotAction.
      *
      * @param bot the specified bot
      */
-    BotAction(Bot bot) {
+    protected BotAction(Bot bot) {
         setBot(bot);
     }
 

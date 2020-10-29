@@ -1,5 +1,6 @@
 package com.github.callumadair;
 
+import com.github.callumadair.Bot.*;
 import org.javacord.api.*;
 import org.javacord.api.entity.permission.*;
 

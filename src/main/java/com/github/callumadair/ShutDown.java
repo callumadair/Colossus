@@ -1,16 +1,18 @@
 package com.github.callumadair;
 
+import com.github.callumadair.Bot.*;
+
 /**
  * The type Shut down.
  */
-class ShutDown extends BotAction {
+public class ShutDown extends BotAction {
 
     /**
      * Instantiates a new Shut down.
      *
      * @param bot the bot
      */
-    ShutDown(Bot bot) {
+    public ShutDown(Bot bot) {
         super(bot);
     }
 

@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import com.github.callumadair.Bot.*;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageSet;
 
@@ -13,7 +14,7 @@ import org.javacord.api.entity.message.MessageSet;
  * @author Callum Adair
  * @version 0.2
  */
-class Purge extends BotAction {
+public class Purge extends BotAction {
 
     /**
      * Creates a new instance of the class with the specified bot.

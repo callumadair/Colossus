@@ -3,6 +3,7 @@ package com.github.callumadair;
 import java.awt.Color;
 import java.util.*;
 
+import com.github.callumadair.Bot.*;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.permission.PermissionType;
 import org.javacord.api.entity.permission.Permissions;
@@ -18,7 +19,7 @@ import org.javacord.api.event.message.MessageCreateEvent;
  * @author Callum Adair
  * @version 0.2
  */
-class RoleManagement extends BotAction {
+public class RoleManagement extends BotAction {
     private static Role muted;
     private static Role member;
 

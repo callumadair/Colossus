@@ -1,7 +1,10 @@
-package com.github.callumadair;
+package com.github.callumadair.Bot;
 
+import com.github.callumadair.*;
 import org.javacord.api.*;
 import org.javacord.api.entity.permission.*;
+import org.javacord.api.entity.server.*;
+import org.javacord.api.entity.user.*;
 
 import java.awt.*;
 import java.util.*;
@@ -13,7 +16,7 @@ import java.util.*;
  * @author Callum Adair
  * @version 0.2
  */
-class Bot {
+public class Bot {
     private Color roleColour;
     private DiscordApi api;
     private String prefix;
@@ -101,6 +104,10 @@ class Bot {
 
     public Role getModeratorRole() {
         return moderatorRole;
+    }
+
+    public boolean isBotModerator(User user, Server server) {
+        return user.getRoles(server).contains(getModeratorRole());
     }
 }
 

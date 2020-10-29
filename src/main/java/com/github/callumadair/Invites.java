@@ -2,6 +2,7 @@ package com.github.callumadair;
 
 import java.util.*;
 
+import com.github.callumadair.Bot.*;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.permission.PermissionType;
 import org.javacord.api.entity.permission.Permissions;
@@ -17,7 +18,7 @@ import org.javacord.api.event.message.MessageCreateEvent;
  * @author Callum Adair
  * @version 0.5
  */
-class Invites extends BotAction{
+public class Invites extends BotAction{
 
     /**
      * Creates a new instance of the invite class with the specified bot.

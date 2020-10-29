@@ -1,5 +1,6 @@
 package com.github.callumadair;
 
+import com.github.callumadair.Bot.*;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
 /**
@@ -8,7 +9,7 @@ import org.javacord.api.entity.message.embed.EmbedBuilder;
  * @author Callum Adair
  * @version 0.2
  */
-class Time extends BotAction {
+public class Time extends BotAction {
 
     /**
      * Creates a new instance of the class with the specified bot.

@@ -1,5 +1,6 @@
 package com.github.callumadair;
 
+import com.github.callumadair.Bot.*;
 import org.javacord.api.entity.message.embed.*;
 import org.javacord.api.entity.server.*;
 import org.javacord.api.entity.user.*;
@@ -14,7 +15,7 @@ import java.util.*;
  * @author Callum Adair
  * @version 0.2
  */
-class Info extends BotAction {
+public class Info extends BotAction {
 
     /**
      * Instantiates a new Info with the specified bot.

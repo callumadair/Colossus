@@ -1,5 +1,6 @@
 package com.github.callumadair;
 
+import com.github.callumadair.Bot.*;
 import org.javacord.api.entity.message.embed.*;
 
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.awt.*;
  * @author Callum Adair
  * @version 0.2
  */
-class FungWah extends BotAction{
+public class FungWah extends BotAction{
 
     /**
      * Creates a new instance of Fung Wah with the specified api and bot.

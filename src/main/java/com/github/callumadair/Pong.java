@@ -1,12 +1,14 @@
 package com.github.callumadair;
 
+import com.github.callumadair.Bot.*;
+
 /**
  * A class for finding the latency of the application.
  *
  * @author Callum Adair
  * @version 1.1
  */
-class Pong extends BotAction{
+public class Pong extends BotAction{
 
     /**
      * Creates a new instance of the class using the specified bot.
