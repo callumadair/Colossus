@@ -33,6 +33,8 @@ public class Ban extends BotAction {
                     banByMention(event, event.getMessageContent().split(" ")
                             [event.getMessageContent().split(" ").length - 1]);
                     banByID(event);
+                    banByID(event, event.getMessageContent().split(" ")
+                            [event.getMessageContent().split(" ").length - 1]);
                 }
             }
         });
@@ -53,7 +55,7 @@ public class Ban extends BotAction {
     }
 
     /**
-     * Bans the mentioned user(s) from the server of the specified event.
+     * Bans the mentioned user(s) from the server of the specified event with a specified reason.
      *
      * @param event  the specified event.
      * @param reason the reason given for the ban.
@@ -77,6 +79,23 @@ public class Ban extends BotAction {
             long banID = Long.parseLong(event.getMessageContent().split(" ")[1]);
             User ban = getBot().getApi().getUserById(banID).get();
             Objects.requireNonNull(event.getServer().orElse(null)).banUser(ban);
+            event.getChannel().sendMessage(banID + " was banned from the server.");
+        } catch (Exception e) {
+            event.getChannel().sendMessage(e.getMessage());
+        }
+    }
+
+    /**
+     * Bans a selected user by their discord ID in the specified event server, with a specified reason.
+     *
+     * @param event  the specified event.
+     * @param reason the specified reason
+     */
+    private void banByID(MessageCreateEvent event, String reason) {
+        try {
+            long banID = Long.parseLong(event.getMessageContent().split(" ")[1]);
+            User ban = getBot().getApi().getUserById(banID).get();
+            Objects.requireNonNull(event.getServer().orElse(null)).banUser(ban, MESSAGE_DELETE_DEFAULT, reason);
             event.getChannel().sendMessage(banID + " was banned from the server.");
         } catch (Exception e) {
             event.getChannel().sendMessage(e.getMessage());
