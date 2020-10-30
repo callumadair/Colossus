@@ -14,11 +14,11 @@ import org.javacord.api.event.message.MessageCreateEvent;
 
 /**
  * Implements invites for bots and servers.
- * 
+ *
  * @author Callum Adair
  * @version 0.5
  */
-public class Invites extends BotAction{
+public class Invites extends BotAction {
 
     /**
      * Creates a new instance of the invite class with the specified bot.
@@ -43,7 +43,7 @@ public class Invites extends BotAction{
 
     /**
      * Creates a new invitation for the server in the specified event channel.
-     * 
+     *
      * @param event the specified event.
      */
     private void createServerInvite(MessageCreateEvent event) {
@@ -56,8 +56,8 @@ public class Invites extends BotAction{
 
     /**
      * Sends an invite to the event's discord server to all users mentioned in the
-     * event message.
-     * 
+     * message.
+     *
      * @param event the specified event.
      */
     private void sendServerInvite(MessageCreateEvent event) {
@@ -72,7 +72,7 @@ public class Invites extends BotAction{
     /**
      * Creates an embed builder containing a server invite for the server the
      * specified event occurred in.
-     * 
+     *
      * @param event the specified event.
      * @return returns an embed builder with a server invite.
      */
@@ -89,7 +89,7 @@ public class Invites extends BotAction{
 
     /**
      * Creates a new invite for the bot application in the specified event channel.
-     * 
+     *
      * @param event the specified event.
      */
     private void createBotInvite(MessageCreateEvent event) {
@@ -101,7 +101,7 @@ public class Invites extends BotAction{
     /**
      * Sends an invite for the bot user to all users mentioned in the specified
      * event message.
-     * 
+     *
      * @param event the specified event.
      */
     private void sendBotInvite(MessageCreateEvent event) {
@@ -115,7 +115,7 @@ public class Invites extends BotAction{
 
     /**
      * Creates an embed builder containing an invite for the bot user.
-     * 
+     *
      * @param event the event calling the creation of the embed builder.
      * @return returns an embed builder containing a bot invite.
      */
