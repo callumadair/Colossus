@@ -15,41 +15,42 @@ import org.javacord.api.event.message.*;
  */
 public class Purge extends BotAction {
 
-    /**
-     * Creates a new instance of the class with the specified bot.
-     *
-     * @param bot the specified bot.
-     */
-    public Purge(Bot bot) {
-        super(bot);
-    }
+  /**
+   * Creates a new instance of the class with the specified bot.
+   *
+   * @param bot the specified bot.
+   */
+  public Purge(Bot bot) {
+    super(bot);
+  }
 
-    /**
-     * Implements the methods of the class.
-     */
-    public void start() {
-        getBot().getApi().addMessageCreateListener(event -> {
-            if (bot.isBotModerator(Objects.requireNonNull(event.getMessageAuthor().asUser().orElse(null)),
-                    event.getServer().orElse(null))) {
-                if (event.getMessageContent().split(" ")[0]
-                        .equalsIgnoreCase(getBot().getPrefix() + "purge")) {
-                    purgeMessages(event);
+  /** Implements the methods of the class. */
+  public void start() {
+    getBot()
+        .getApi()
+        .addMessageCreateListener(
+            event -> {
+              if (bot.isBotModerator(
+                  Objects.requireNonNull(event.getMessageAuthor().asUser().orElse(null)),
+                  event.getServer().orElse(null))) {
+                if (event
+                    .getMessageContent()
+                    .split(" ")[0]
+                    .equalsIgnoreCase(getBot().getPrefix() + "purge")) {
+                  purgeMessages(event);
                 }
-            }
-        });
+              }
+            });
+  }
 
+  /** Deletes the specified number of messages starting from the most recent. */
+  private void purgeMessages(MessageCreateEvent event) {
+    String[] messageArray = event.getMessageContent().split(" ");
+    int numOfMessages = Integer.parseInt(messageArray[messageArray.length - 1]);
+
+    MessageSet messages = event.getChannel().getMessages(numOfMessages).join();
+    for (Message message : messages) {
+      message.delete();
     }
-
-    /**
-     * Deletes the specified number of messages starting from the most recent.
-     */
-    private void purgeMessages(MessageCreateEvent event) {
-        String[] messageArray = event.getMessageContent().split(" ");
-        int numOfMessages = Integer.parseInt(messageArray[messageArray.length - 1]);
-
-        MessageSet messages = event.getChannel().getMessages(numOfMessages).join();
-        for (Message message : messages) {
-            message.delete();
-        }
-    }
+  }
 }

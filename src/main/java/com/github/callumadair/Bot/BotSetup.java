@@ -12,42 +12,45 @@ import org.javacord.api.entity.user.User;
  */
 public class BotSetup extends BotAction {
 
-    /**
-     * Creates a new instance of the setup.
-     *
-     * @param bot the specified bot.
-     */
-    public BotSetup(Bot bot) {
-        super(bot);
-    }
+  /**
+   * Creates a new instance of the setup.
+   *
+   * @param bot the specified bot.
+   */
+  public BotSetup(Bot bot) {
+    super(bot);
+  }
 
-    /**
-     * Implements the methods of the setup.
-     */
-    public void start() {
-        roleSetup();
-    }
+  /** Implements the methods of the setup. */
+  public void start() {
+    roleSetup();
+  }
 
-    /**
-     * Sets the bot's displayed role colour in the discord server.
-     */
-    private void roleSetup() {
-        getBot().getApi().addServerJoinListener(listener -> {
-            User colossus = getBot().getApi().getYourself();
+  /** Sets the bot's displayed role colour in the discord server. */
+  private void roleSetup() {
+    getBot()
+        .getApi()
+        .addServerJoinListener(
+            listener -> {
+              User colossus = getBot().getApi().getYourself();
 
-            RoleBuilder colourBuilder = new RoleBuilder(listener.getServer());
-            colourBuilder.setColor(getBot().getRoleColour()).setName("Bot Colour");
-            Role colour = colourBuilder.create().join();
-            colour.addUser(colossus);
+              RoleBuilder colourBuilder = new RoleBuilder(listener.getServer());
+              colourBuilder.setColor(getBot().getRoleColour()).setName("Bot Colour");
+              Role colour = colourBuilder.create().join();
+              colour.addUser(colossus);
 
-            RoleBuilder moderatorBuilder = new RoleBuilder(listener.getServer());
-            PermissionsBuilder permissionsBuilder = new PermissionsBuilder();
-            permissionsBuilder.setAllowed(PermissionType.CHANGE_NICKNAME, PermissionType.DEAFEN_MEMBERS,
-                    PermissionType.MOVE_MEMBERS, PermissionType.MUTE_MEMBERS, PermissionType.MANAGE_ROLES,
-                    PermissionType.MANAGE_MESSAGES);
-            moderatorBuilder.setPermissions(permissionsBuilder.build());
-            moderatorBuilder.setName("Moderator");
-            getBot().setModeratorRole(moderatorBuilder.create().join());
-        });
-    }
+              RoleBuilder moderatorBuilder = new RoleBuilder(listener.getServer());
+              PermissionsBuilder permissionsBuilder = new PermissionsBuilder();
+              permissionsBuilder.setAllowed(
+                  PermissionType.CHANGE_NICKNAME,
+                  PermissionType.DEAFEN_MEMBERS,
+                  PermissionType.MOVE_MEMBERS,
+                  PermissionType.MUTE_MEMBERS,
+                  PermissionType.MANAGE_ROLES,
+                  PermissionType.MANAGE_MESSAGES);
+              moderatorBuilder.setPermissions(permissionsBuilder.build());
+              moderatorBuilder.setName("Moderator");
+              getBot().setModeratorRole(moderatorBuilder.create().join());
+            });
+  }
 }

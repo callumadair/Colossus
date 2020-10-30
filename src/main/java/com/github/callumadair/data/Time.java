@@ -14,33 +14,35 @@ import java.time.temporal.*;
  */
 public class Time extends BotAction {
 
-    /**
-     * Creates a new instance of the class with the specified bot.
-     *
-     * @param bot the specified bot.
-     */
-    public Time(Bot bot) {
-        super(bot);
-    }
+  /**
+   * Creates a new instance of the class with the specified bot.
+   *
+   * @param bot the specified bot.
+   */
+  public Time(Bot bot) {
+    super(bot);
+  }
 
-    /**
-     * Implements the methods of the class.
-     */
-    public void start() {
-        getTime();
-    }
+  /** Implements the methods of the class. */
+  public void start() {
+    getTime();
+  }
 
-    /**
-     * Gets the current time in an embed.
-     */
-    private void getTime() {
-        getBot().getApi().addMessageCreateListener(event -> {
-            if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "time")) {
+  /** Gets the current time in an embed. */
+  private void getTime() {
+    getBot()
+        .getApi()
+        .addMessageCreateListener(
+            event -> {
+              if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "time")) {
                 EmbedBuilder embed = new EmbedBuilder();
-                embed.setTitle("Bot time is currently " + LocalTime.now().truncatedTo(ChronoUnit.MINUTES).toString())
-                        .setColor(getBot().getRoleColour());
+                embed
+                    .setTitle(
+                        "Bot time is currently "
+                            + LocalTime.now().truncatedTo(ChronoUnit.MINUTES).toString())
+                    .setColor(getBot().getRoleColour());
                 event.getChannel().sendMessage(embed);
-            }
-        });
-    }
+              }
+            });
+  }
 }
