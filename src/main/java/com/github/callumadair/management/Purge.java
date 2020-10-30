@@ -44,22 +44,12 @@ public class Purge extends BotAction {
      * Deletes the specified number of starting from the most recent.
      */
     private void purgeMessages(MessageCreateEvent event) {
-        try {
-            Scanner in = new Scanner(event.getMessageContent());
-            in.next();
-            int numOfMessages = in.nextInt() + 1;
+        String[] messageArray = event.getMessageContent().split(" ");
+        int numOfMessages = Integer.parseInt(messageArray[messageArray.length - 1]);
 
-            MessageSet messages = event.getChannel().getMessages(numOfMessages).join();
-            for (Message message : messages) {
-                message.delete();
-            }
-            in.close();
-        } catch (InputMismatchException e) {
-            event.getChannel().sendMessage("Please try again with a whole number.");
-        } catch (NoSuchElementException e) {
-            event.getChannel().sendMessage("Please specify a number of messages.");
+        MessageSet messages = event.getChannel().getMessages(numOfMessages).join();
+        for (Message message : messages) {
+            message.delete();
         }
-
-
     }
 }
