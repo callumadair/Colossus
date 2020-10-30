@@ -18,3 +18,10 @@ gradle-app.setting
 src/main/java/com/github/callumadair/Token.java
 src/main/java/com/github/callumadair/Bot/Token.java
 .idea/workspace.xml
+.idea/compiler.xml
+.idea/discord.xml
+.idea/google-java-format.xml
+.idea/gradle.xml
+.idea/jarRepositories.xml
+.idea/misc.xml
+.idea/vcs.xml
