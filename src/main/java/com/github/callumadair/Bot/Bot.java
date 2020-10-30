@@ -23,13 +23,13 @@ public class Bot {
   private String prefix;
   private Role moderatorRole;
 
-    /**
-     * Specifies the api, command prefix and role colour.
-     *
-     * @param api        the api for the bot to use.
-     * @param roleColour the colour of the bot in the discord server to be set on join.
-     */
-    public Bot(DiscordApi api, Color roleColour) {
+  /**
+   * Specifies the api, command prefix and role colour.
+   *
+   * @param api the api for the bot to use.
+   * @param roleColour the colour of the bot in the discord server to be set on join.
+   */
+  public Bot(DiscordApi api, Color roleColour) {
     setApi(api);
     setColour(roleColour);
   }
@@ -43,30 +43,30 @@ public class Bot {
     this.api = api;
   }
 
-    /**
-     * Gets api.
-     *
-     * @return returns the current api.
-     */
-    public DiscordApi getApi() {
+  /**
+   * Gets api.
+   *
+   * @return returns the current api.
+   */
+  public DiscordApi getApi() {
     return api;
   }
 
-    /**
-     * Sets prefix.
-     *
-     * @param prefix the prefix
-     */
-    public void setPrefix(String prefix) {
+  /**
+   * Sets prefix.
+   *
+   * @param prefix the prefix
+   */
+  public void setPrefix(String prefix) {
     this.prefix = prefix;
   }
 
-    /**
-     * Gets prefix.
-     *
-     * @return the prefix
-     */
-    public String getPrefix() {
+  /**
+   * Gets prefix.
+   *
+   * @return the prefix
+   */
+  public String getPrefix() {
     if (prefix != null) {
       return this.prefix;
     }
@@ -82,19 +82,17 @@ public class Bot {
     this.roleColour = roleColour;
   }
 
-    /**
-     * Gets role colour.
-     *
-     * @return returns the colour of the bot's colour role.
-     */
-    public Color getRoleColour() {
+  /**
+   * Gets role colour.
+   *
+   * @return returns the colour of the bot's colour role.
+   */
+  public Color getRoleColour() {
     return roleColour;
   }
 
-    /**
-     * Instantiates all classes and methods of the bot's functionality.
-     */
-    public void listener() {
+  /** Instantiates all classes and methods of the bot's functionality. */
+  public void listener() {
     ArrayList<BotAction> botActions = new ArrayList<>();
 
     botActions.add(new BotSetup(this));
@@ -108,48 +106,42 @@ public class Bot {
     }
   }
 
-    /**
-     * Sets moderator role.
-     *
-     * @param moderatorRole the moderator role
-     */
-    public void setModeratorRole(Role moderatorRole) {
+  /**
+   * Sets moderator role.
+   *
+   * @param moderatorRole the moderator role
+   */
+  public void setModeratorRole(Role moderatorRole) {
     this.moderatorRole = moderatorRole;
   }
 
-    /**
-     * Gets moderator role.
-     *
-     * @return the moderator role
-     */
-    public Role getModeratorRole() {
+  /**
+   * Gets moderator role.
+   *
+   * @return the moderator role
+   */
+  public Role getModeratorRole() {
     return moderatorRole;
   }
 
-    /**
-     * Is bot moderator boolean.
-     *
-     * @param user   the user
-     * @param server the server
-     * @return the boolean
-     */
-    public boolean isBotModerator(User user, Server server) {
+  /**
+   * Is bot moderator boolean.
+   *
+   * @param user the user
+   * @param server the server
+   * @return the boolean
+   */
+  public boolean isBotModerator(User user, Server server) {
     return user.getRoles(server).contains(getModeratorRole());
   }
 }
 
-/**
- * The enum Values.
- */
+/** The enum Values. */
 enum Values {
-    /**
-     * Default prefix values.
-     */
-    DEFAULT_PREFIX("!");
-    /**
-     * The Value.
-     */
-    String value;
+  /** Default prefix values. */
+  DEFAULT_PREFIX("!");
+  /** The Value. */
+  String value;
 
   Values(String value) {
     this.value = value;
