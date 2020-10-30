@@ -50,7 +50,7 @@ public class Kick extends BotAction {
     }
 
     /**
-     * Kicks the mentioned user(s) from the server of the specified event.
+     * Kicks the mentioned user(s) from the server of the specified event, with a specific reason.
      *
      * @param event  the specified event.
      * @param reason the reason given for kicking.
@@ -80,5 +80,21 @@ public class Kick extends BotAction {
         }
     }
 
+    /**
+     * Kicks a specified user by their discord ID in the specified event server, with a specified reason.
+     *
+     * @param event  the specified event.
+     * @param reason the specified reason
+     */
+    private void kickByID(MessageCreateEvent event, String reason) {
+        try {
+            long banID = Long.parseLong(event.getMessageContent().split(" ")[1]);
+            User kick = getBot().getApi().getUserById(banID).get();
+            Objects.requireNonNull(event.getServer().orElse(null)).kickUser(kick, reason);
+            event.getChannel().sendMessage(banID + " was kicked from the server.");
+        } catch (Exception e) {
+            event.getChannel().sendMessage(e.getMessage());
+        }
+    }
 
 }
