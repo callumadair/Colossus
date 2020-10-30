@@ -41,7 +41,7 @@ public class Purge extends BotAction {
     }
 
     /**
-     * Deletes the specified number of starting from the most recent.
+     * Deletes the specified number of messages starting from the most recent.
      */
     private void purgeMessages(MessageCreateEvent event) {
         String[] messageArray = event.getMessageContent().split(" ");
