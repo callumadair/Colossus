@@ -31,6 +31,8 @@ public class Kick extends BotAction {
                 kickByMention(event, event.getMessageContent().split(" ")
                         [event.getMessageContent().split(" ").length - 1]);
                 kickByID(event);
+                kickByID(event, event.getMessageContent().split(" ")
+                        [event.getMessageContent().split(" ").length - 1]);
             }
         });
     }
