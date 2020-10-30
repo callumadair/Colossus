@@ -3,6 +3,9 @@ package com.github.callumadair.data;
 import com.github.callumadair.Bot.*;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
+import java.time.*;
+import java.time.temporal.*;
+
 /**
  * Gets the current time on google.
  *
@@ -34,9 +37,8 @@ public class Time extends BotAction {
         getBot().getApi().addMessageCreateListener(event -> {
             if (event.getMessageContent().equalsIgnoreCase(getBot().getPrefix() + "time")) {
                 EmbedBuilder embed = new EmbedBuilder();
-                embed.setTitle("Time").setColor(getBot().getRoleColour()).setUrl(
-                        "https://www.google.com/search?q=time&rlz=1C1CHBD_en-GBGB828GB828&oq=time&aqs=chrome" +
-                                ".0.69i59l3j69i60l2j69i61j69i65j69i60.638j0j7&sourceid=chrome&ie=UTF-8");
+                embed.setTitle("Bot time is currently " + LocalTime.now().truncatedTo(ChronoUnit.MINUTES).toString())
+                        .setColor(getBot().getRoleColour());
                 event.getChannel().sendMessage(embed);
             }
         });
