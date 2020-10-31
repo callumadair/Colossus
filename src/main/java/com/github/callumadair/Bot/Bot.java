@@ -129,7 +129,7 @@ public class Bot {
    *
    * @param user the user
    * @param server the server
-   * @return the boolean
+   * @return if the user is a moderator in that server.
    */
   public boolean isBotModerator(User user, Server server) {
     return user.getRoles(server).contains(getModeratorRole());
