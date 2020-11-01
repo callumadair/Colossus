@@ -91,8 +91,7 @@ public class Info extends BotAction {
             .addField(
                 "Channels",
                 (server.getChannels().size() - server.getChannelCategories().size()) + " channels")
-            .addField(
-                "Owner", Objects.requireNonNull(server.getOwner().orElse(null)).getMentionTag())
+            .addField("Owner", "<@" + server.getOwnerId() + ">")
             .addField(
                 "Creation Date",
                 server.getCreationTimestamp().truncatedTo(ChronoUnit.MINUTES).toString());
