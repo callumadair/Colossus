@@ -43,7 +43,7 @@ public class RoleManagement extends BotAction {
               removeRole(event);
               clearRoles(event);
               createAdminRole(event);
-              setModeratorRoles(event);
+              setServerModeratorRoles(event);
               createMutedRole(event);
               muteUser(event);
               roles(event);
@@ -58,7 +58,8 @@ public class RoleManagement extends BotAction {
   private void addRole(MessageCreateEvent event) {
 
     if (event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "addrole")
-        && event.getMessageAuthor().canManageRolesOnServer()) {
+        && getBot()
+            .isBotModerator(event.getMessageAuthor().asUser().get(), event.getServer().get())) {
       List<User> newUsers = event.getMessage().getMentionedUsers();
       List<Role> newRoles = event.getMessage().getMentionedRoles();
 
@@ -85,7 +86,7 @@ public class RoleManagement extends BotAction {
    * @param event the specified event.
    */
   private void autoRole(MessageCreateEvent event) {
-    if (event.getMessageAuthor().isServerAdmin()
+    if (getBot().isBotModerator(event.getMessageAuthor().asUser().get(), event.getServer().get())
         && event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "autorole")) {
       List<Role> autoRoles = event.getMessage().getMentionedRoles();
       EmbedBuilder autoRoleMessage = new EmbedBuilder();
@@ -126,7 +127,8 @@ public class RoleManagement extends BotAction {
    */
   private void removeRole(MessageCreateEvent event) {
     if (event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "removerole")
-        && event.getMessageAuthor().canManageRolesOnServer()) {
+        && getBot()
+            .isBotModerator(event.getMessageAuthor().asUser().get(), event.getServer().get())) {
       List<User> oldUsers = event.getMessage().getMentionedUsers();
       List<Role> oldRoles = event.getMessage().getMentionedRoles();
 
@@ -202,7 +204,7 @@ public class RoleManagement extends BotAction {
    *
    * @param event the specified event.
    */
-  private void setModeratorRoles(MessageCreateEvent event) {
+  private void setServerModeratorRoles(MessageCreateEvent event) {
 
     if (event.getMessageAuthor().isServerAdmin()
         && event.getMessageContent().toLowerCase().contains(getBot().getPrefix() + "setmod")) {
@@ -216,12 +218,13 @@ public class RoleManagement extends BotAction {
           PermissionType.VIEW_AUDIT_LOG);
       Permissions perms = modPerms.build();
 
-      List<Role> moderatorRoles = event.getMessage().getMentionedRoles();
-      for (Role modRole : moderatorRoles) {
+      List<Role> serverModeratorRoles = event.getMessage().getMentionedRoles();
+      for (Role modRole : serverModeratorRoles) {
         modRole.updatePermissions(perms);
-        moderatorRoles.add(modRole);
+        serverModeratorRoles.add(modRole);
         event.getChannel().sendMessage(modRole.getName() + " is now a moderator role");
       }
+      getBot().addModeratorRoles(serverModeratorRoles);
     }
   }
 

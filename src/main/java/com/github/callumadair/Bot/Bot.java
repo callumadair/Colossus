@@ -10,6 +10,7 @@ import org.javacord.api.entity.user.*;
 
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * A bot implements a discord bot and gives it features to enable it's functionality.
@@ -21,7 +22,7 @@ public class Bot {
   private Color roleColour;
   private DiscordApi api;
   private String prefix;
-  private Role moderatorRole;
+  private ArrayList<Role> moderatorRoles;
 
   /**
    * Specifies the api, command prefix and role colour.
@@ -109,10 +110,10 @@ public class Bot {
   /**
    * Sets moderator role.
    *
-   * @param moderatorRole the moderator role
+   * @param moderatorRoles the moderator role
    */
-  public void setModeratorRole(Role moderatorRole) {
-    this.moderatorRole = moderatorRole;
+  public void addModeratorRoles(List<Role> moderatorRoles) {
+    this.moderatorRoles.addAll(moderatorRoles);
   }
 
   /**
@@ -120,8 +121,8 @@ public class Bot {
    *
    * @return the moderator role
    */
-  public Role getModeratorRole() {
-    return moderatorRole;
+  public ArrayList<Role> getModeratorRoles() {
+    return moderatorRoles;
   }
 
   /**
@@ -132,7 +133,10 @@ public class Bot {
    * @return if the user is a moderator in that server.
    */
   public boolean isBotModerator(User user, Server server) {
-    return user.getRoles(server).contains(getModeratorRole());
+    for (Role moderatorRole : moderatorRoles) {
+      return user.getRoles(server).contains(moderatorRole);
+    }
+    return false;
   }
 }
 
