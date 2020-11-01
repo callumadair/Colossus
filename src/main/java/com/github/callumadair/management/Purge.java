@@ -31,8 +31,7 @@ public class Purge extends BotAction {
         .addMessageCreateListener(
             event -> {
               if (bot.isBotModerator(
-                  Objects.requireNonNull(event.getMessageAuthor().asUser().orElse(null)),
-                  event.getServer().orElse(null))) {
+                  event.getMessageAuthor().asUser().get(), event.getServer().get())) {
                 if (event
                     .getMessageContent()
                     .split(" ")[0]

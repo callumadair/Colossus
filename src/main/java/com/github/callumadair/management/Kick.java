@@ -25,8 +25,7 @@ public class Kick extends BotAction {
         .addMessageCreateListener(
             event -> {
               if (bot.isBotModerator(
-                      Objects.requireNonNull(event.getMessageAuthor().asUser().orElse(null)),
-                      event.getServer().orElse(null))
+                      event.getMessageAuthor().asUser().get(), event.getServer().orElse(null))
                   && event
                       .getMessageContent()
                       .split(" ")[0]
@@ -52,8 +51,7 @@ public class Kick extends BotAction {
    */
   private void kickByMention(MessageCreateEvent event) {
     List<User> kicks = event.getMessage().getMentionedUsers();
-    Server server = event.getServer().orElse(null);
-    assert server != null;
+    Server server = event.getServer().get();
     for (User kick : kicks) {
       server.kickUser(kick);
     }
@@ -67,8 +65,7 @@ public class Kick extends BotAction {
    */
   private void kickByMention(MessageCreateEvent event, String reason) {
     List<User> kicks = event.getMessage().getMentionedUsers();
-    Server server = event.getServer().orElse(null);
-    assert server != null;
+    Server server = event.getServer().get();
     for (User kick : kicks) {
       server.kickUser(kick, reason);
     }
@@ -83,7 +80,7 @@ public class Kick extends BotAction {
     try {
       long kickID = Long.parseLong(event.getMessageContent().split(" ")[1]);
       User kick = getBot().getApi().getUserById(kickID).get();
-      Objects.requireNonNull(event.getServer().orElse(null)).kickUser(kick);
+      event.getServer().get().kickUser(kick);
       event.getChannel().sendMessage(kickID + " was kicked from the server.");
     } catch (Exception e) {
       event.getChannel().sendMessage(e.getMessage());
@@ -101,7 +98,7 @@ public class Kick extends BotAction {
     try {
       long banID = Long.parseLong(event.getMessageContent().split(" ")[1]);
       User kick = getBot().getApi().getUserById(banID).get();
-      Objects.requireNonNull(event.getServer().orElse(null)).kickUser(kick, reason);
+      event.getServer().get().kickUser(kick, reason);
       event.getChannel().sendMessage(banID + " was kicked from the server.");
     } catch (Exception e) {
       event.getChannel().sendMessage(e.getMessage());

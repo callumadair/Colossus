@@ -85,7 +85,7 @@ public class Invites extends BotAction {
 
     EmbedBuilder serverInvite = new EmbedBuilder();
     serverInvite
-        .setTitle("Invite to " + Objects.requireNonNull(event.getServer().orElse(null)).getName())
+        .setTitle("Invite to " + event.getServer().get().getName())
         .setFooter("Made by Cal")
         .setUrl(invite.getUrl().toString())
         .setTimestampToNow()

@@ -27,8 +27,7 @@ public class Ban extends BotAction {
         .addMessageCreateListener(
             event -> {
               if (bot.isBotModerator(
-                  Objects.requireNonNull(event.getMessageAuthor().asUser().orElse(null)),
-                  event.getServer().orElse(null))) {
+                  event.getMessageAuthor().asUser().get(), event.getServer().get())) {
                 if (event
                     .getMessageContent()
                     .split(" ")[0]
@@ -55,8 +54,7 @@ public class Ban extends BotAction {
    */
   private void banByMention(MessageCreateEvent event) {
     List<User> bans = event.getMessage().getMentionedUsers();
-    Server server = event.getServer().orElse(null);
-    assert server != null;
+    Server server = event.getServer().get();
     for (User ban : bans) {
       server.banUser(ban);
     }
@@ -70,8 +68,7 @@ public class Ban extends BotAction {
    */
   private void banByMention(MessageCreateEvent event, String reason) {
     List<User> bans = event.getMessage().getMentionedUsers();
-    Server server = event.getServer().orElse(null);
-    assert server != null;
+    Server server = event.getServer().get();
     for (User ban : bans) {
       server.banUser(ban, MESSAGE_DELETE_DEFAULT, reason);
     }
@@ -86,7 +83,7 @@ public class Ban extends BotAction {
     try {
       long banID = Long.parseLong(event.getMessageContent().split(" ")[1]);
       User ban = getBot().getApi().getUserById(banID).get();
-      Objects.requireNonNull(event.getServer().orElse(null)).banUser(ban);
+      event.getServer().get().banUser(ban);
       event.getChannel().sendMessage(banID + " was banned from the server.");
     } catch (Exception e) {
       event.getChannel().sendMessage(e.getMessage());
@@ -104,8 +101,7 @@ public class Ban extends BotAction {
     try {
       long banID = Long.parseLong(event.getMessageContent().split(" ")[1]);
       User ban = getBot().getApi().getUserById(banID).get();
-      Objects.requireNonNull(event.getServer().orElse(null))
-          .banUser(ban, MESSAGE_DELETE_DEFAULT, reason);
+      event.getServer().get().banUser(ban, MESSAGE_DELETE_DEFAULT, reason);
       event.getChannel().sendMessage(banID + " was banned from the server.");
     } catch (Exception e) {
       event.getChannel().sendMessage(e.getMessage());
