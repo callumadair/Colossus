@@ -26,3 +26,6 @@ src/main/java/com/github/callumadair/Bot/Token.java
 .idea/misc.xml
 .idea/vcs.xml
 .idea/intellij-javadocs-4.0.1.xml
+.idea/Colossus.iml
+.idea/modules.xml
+.idea/uiDesigner.xml
