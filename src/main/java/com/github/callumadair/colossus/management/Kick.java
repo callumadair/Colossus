@@ -1,6 +1,6 @@
-package com.github.callumadair.management;
+package com.github.callumadair.colossus.management;
 
-import com.github.callumadair.Bot.*;
+import com.github.callumadair.colossus.Bot.*;
 import org.javacord.api.entity.server.*;
 import org.javacord.api.entity.user.*;
 import org.javacord.api.event.message.*;

@@ -1,4 +1,4 @@
-package com.github.callumadair.Bot;
+package com.github.callumadair.colossus.Bot;
 
 /** The type BotAction, an abstract superclass for all bot actions. */
 public abstract class BotAction {

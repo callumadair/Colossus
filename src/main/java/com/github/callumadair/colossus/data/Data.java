@@ -1,6 +1,6 @@
-package com.github.callumadair.data;
+package com.github.callumadair.colossus.data;
 
-import com.github.callumadair.Bot.*;
+import com.github.callumadair.colossus.Bot.*;
 
 import java.util.*;
 

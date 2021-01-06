@@ -1,6 +1,5 @@
-package com.github.callumadair.Bot;
+package com.github.callumadair.colossus.Bot;
 
-import com.github.callumadair.Bot.*;
 import org.javacord.api.entity.permission.*;
 import org.javacord.api.entity.user.User;
 

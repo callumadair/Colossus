@@ -1,9 +1,9 @@
-package com.github.callumadair.management;
+package com.github.callumadair.colossus.management;
 
 import java.awt.Color;
 import java.util.*;
 
-import com.github.callumadair.Bot.*;
+import com.github.callumadair.colossus.Bot.*;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.permission.PermissionType;
 import org.javacord.api.entity.permission.Permissions;

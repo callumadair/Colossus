@@ -1,6 +1,6 @@
-package com.github.callumadair;
+package com.github.callumadair.colossus;
 
-import com.github.callumadair.Bot.*;
+import com.github.callumadair.colossus.Bot.*;
 import org.javacord.api.entity.message.embed.*;
 
 import java.awt.*;

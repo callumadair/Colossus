@@ -1,6 +1,4 @@
-package com.github.callumadair.Bot;
-
-import com.github.callumadair.Bot.*;
+package com.github.callumadair.colossus.Bot;
 
 /** The type Shut down. */
 public class ShutDown extends BotAction {
