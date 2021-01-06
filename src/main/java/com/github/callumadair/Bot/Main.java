@@ -1,4 +1,4 @@
-package com.github.callumadair.colossus.Bot;
+package com.github.callumadair.Bot;
 
 import org.javacord.api.*;
 import org.javacord.api.entity.permission.*;

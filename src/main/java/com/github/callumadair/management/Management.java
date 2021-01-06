@@ -1,6 +1,6 @@
-package com.github.callumadair.colossus.management;
+package com.github.callumadair.management;
 
-import com.github.callumadair.colossus.Bot.*;
+import com.github.callumadair.Bot.*;
 
 import java.util.*;
 
