@@ -22,7 +22,7 @@ public class Bot {
   private Color roleColour;
   private DiscordApi api;
   private String prefix;
-  private ArrayList<Role> moderatorRoles;
+  private final ArrayList<Role> moderatorRoles = new ArrayList<>();
 
   /**
    * Specifies the api, command prefix and role colour.

@@ -4,6 +4,8 @@ import com.github.callumadair.Bot.*;
 import org.javacord.api.entity.permission.*;
 import org.javacord.api.entity.user.User;
 
+import java.util.*;
+
 /**
  * Implements the configuration of a bot on using a specified api.
  *
@@ -50,7 +52,7 @@ public class BotSetup extends BotAction {
                   PermissionType.MANAGE_MESSAGES);
               moderatorBuilder.setPermissions(permissionsBuilder.build());
               moderatorBuilder.setName("Moderator");
-              getBot().setModeratorRole(moderatorBuilder.create().join());
+              getBot().addModeratorRoles(Collections.singletonList(moderatorBuilder.create().join()));
             });
   }
 }
