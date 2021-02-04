@@ -29,3 +29,4 @@ src/main/java/com/github/callumadair/Bot/Token.java
 .idea/Colossus.iml
 .idea/modules.xml
 .idea/uiDesigner.xml
+src/main/java/com/github/callumadair/bot/control/Token.java
