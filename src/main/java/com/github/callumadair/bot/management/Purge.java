@@ -1,8 +1,6 @@
-package com.github.callumadair.management;
+package com.github.callumadair.bot.management;
 
-import java.util.*;
-
-import com.github.callumadair.Bot.*;
+import com.github.callumadair.bot.control.*;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageSet;
 import org.javacord.api.event.message.*;
@@ -25,7 +23,7 @@ public class Purge extends BotAction {
   }
 
   /** Implements the methods of the class. */
-  public void start() {
+  public void action() {
     getBot()
         .getApi()
         .addMessageCreateListener(

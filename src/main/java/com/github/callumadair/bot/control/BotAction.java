@@ -1,4 +1,4 @@
-package com.github.callumadair.Bot;
+package com.github.callumadair.bot.control;
 
 /** The type BotAction, an abstract superclass for all bot actions. */
 public abstract class BotAction {
@@ -14,7 +14,7 @@ public abstract class BotAction {
   }
 
   /** Listener method for commands. */
-  public abstract void start();
+  public abstract void action();
 
   /**
    * Sets the bot to the one specified.

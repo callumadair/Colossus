@@ -1,6 +1,6 @@
-package com.github.callumadair.data;
+package com.github.callumadair.bot.data;
 
-import com.github.callumadair.Bot.*;
+import com.github.callumadair.bot.control.*;
 import org.javacord.api.entity.message.embed.*;
 import org.javacord.api.entity.server.*;
 import org.javacord.api.entity.user.*;
@@ -27,7 +27,7 @@ public class Info extends BotAction {
   }
 
   /** Implements the methods of the Info class. */
-  public void start() {
+  public void action() {
     getBot()
         .getApi()
         .addMessageCreateListener(

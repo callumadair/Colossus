@@ -1,6 +1,6 @@
-package com.github.callumadair.management;
+package com.github.callumadair.bot.management;
 
-import com.github.callumadair.Bot.*;
+import com.github.callumadair.bot.control.*;
 
 import java.util.*;
 
@@ -17,7 +17,7 @@ public class Management extends BotAction {
   }
 
   @Override
-  public void start() {
+  public void action() {
     ArrayList<BotAction> managementActions = new ArrayList<>();
     managementActions.add(new Kick(getBot()));
     managementActions.add(new Ban(getBot()));
@@ -25,7 +25,7 @@ public class Management extends BotAction {
     managementActions.add(new RoleManagement(getBot()));
 
     for (BotAction action : managementActions) {
-      action.start();
+      action.action();
     }
   }
 }

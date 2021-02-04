@@ -1,6 +1,6 @@
-package com.github.callumadair.management;
+package com.github.callumadair.bot.management;
 
-import com.github.callumadair.Bot.*;
+import com.github.callumadair.bot.control.*;
 import org.javacord.api.entity.server.*;
 import org.javacord.api.entity.user.*;
 import org.javacord.api.event.message.*;
@@ -21,7 +21,7 @@ public class Ban extends BotAction {
   }
 
   @Override
-  public void start() {
+  public void action() {
     getBot()
         .getApi()
         .addMessageCreateListener(

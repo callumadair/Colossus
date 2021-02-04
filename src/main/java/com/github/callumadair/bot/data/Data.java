@@ -1,6 +1,6 @@
-package com.github.callumadair.data;
+package com.github.callumadair.bot.data;
 
-import com.github.callumadair.Bot.*;
+import com.github.callumadair.bot.control.*;
 
 import java.util.*;
 
@@ -16,7 +16,7 @@ public class Data extends BotAction {
   }
 
   @Override
-  public void start() {
+  public void action() {
     ArrayList<BotAction> dataActions = new ArrayList<>();
 
     dataActions.add(new Info(getBot()));
@@ -25,7 +25,7 @@ public class Data extends BotAction {
     dataActions.add(new Time(getBot()));
 
     for (BotAction dataAction : dataActions) {
-      dataAction.start();
+      dataAction.action();
     }
   }
 }

@@ -1,6 +1,6 @@
-package com.github.callumadair.data;
+package com.github.callumadair.bot.data;
 
-import com.github.callumadair.Bot.*;
+import com.github.callumadair.bot.control.*;
 
 /**
  * A class for finding the latency of the application.
@@ -20,7 +20,7 @@ public class Pong extends BotAction {
   }
 
   /** Implements the methods of the class. */
-  public void start() {
+  public void action() {
     getPing();
   }
 

@@ -1,6 +1,6 @@
-package com.github.callumadair.data;
+package com.github.callumadair.bot.data;
 
-import com.github.callumadair.Bot.*;
+import com.github.callumadair.bot.control.*;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
 import java.time.*;
@@ -24,7 +24,7 @@ public class Time extends BotAction {
   }
 
   /** Implements the methods of the class. */
-  public void start() {
+  public void action() {
     getTime();
   }
 

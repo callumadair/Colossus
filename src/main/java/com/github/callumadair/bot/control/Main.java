@@ -1,4 +1,4 @@
-package com.github.callumadair.Bot;
+package com.github.callumadair.bot.control;
 
 import org.javacord.api.*;
 import org.javacord.api.entity.permission.*;

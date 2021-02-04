@@ -1,6 +1,6 @@
-package com.github.callumadair;
+package com.github.callumadair.bot.random;
 
-import com.github.callumadair.Bot.*;
+import com.github.callumadair.bot.control.*;
 import org.javacord.api.entity.message.embed.*;
 
 import java.awt.*;
@@ -23,7 +23,7 @@ public class FungWah extends BotAction {
   }
 
   /** Implements the methods of the class. */
-  public void start() {
+  public void action() {
     bully();
   }
 

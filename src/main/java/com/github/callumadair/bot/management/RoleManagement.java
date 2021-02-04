@@ -1,9 +1,9 @@
-package com.github.callumadair.management;
+package com.github.callumadair.bot.management;
 
 import java.awt.Color;
 import java.util.*;
 
-import com.github.callumadair.Bot.*;
+import com.github.callumadair.bot.control.*;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.permission.PermissionType;
 import org.javacord.api.entity.permission.Permissions;
@@ -33,7 +33,7 @@ public class RoleManagement extends BotAction {
   }
 
   /** Implements the methods of the class. */
-  public void start() {
+  public void action() {
     getBot()
         .getApi()
         .addMessageCreateListener(

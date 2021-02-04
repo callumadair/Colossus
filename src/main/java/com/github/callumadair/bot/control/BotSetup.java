@@ -1,6 +1,5 @@
-package com.github.callumadair.Bot;
+package com.github.callumadair.bot.control;
 
-import com.github.callumadair.Bot.*;
 import org.javacord.api.entity.permission.*;
 import org.javacord.api.entity.user.User;
 
@@ -24,7 +23,7 @@ public class BotSetup extends BotAction {
   }
 
   /** Implements the methods of the setup. */
-  public void start() {
+  public void action() {
     roleSetup();
   }
 

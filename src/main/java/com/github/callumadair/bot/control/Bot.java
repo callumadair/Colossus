@@ -1,8 +1,8 @@
-package com.github.callumadair.Bot;
+package com.github.callumadair.bot.control;
 
-import com.github.callumadair.*;
-import com.github.callumadair.data.*;
-import com.github.callumadair.management.*;
+import com.github.callumadair.bot.data.*;
+import com.github.callumadair.bot.management.*;
+import com.github.callumadair.bot.random.*;
 import org.javacord.api.*;
 import org.javacord.api.entity.permission.*;
 import org.javacord.api.entity.server.*;
@@ -23,6 +23,7 @@ public class Bot {
   private DiscordApi api;
   private String prefix;
   private final ArrayList<Role> moderatorRoles = new ArrayList<>();
+  private ArrayList<User> botUsers = new ArrayList<>();
 
   /**
    * Specifies the api, command prefix and role colour.
@@ -103,7 +104,7 @@ public class Bot {
     botActions.add(new ShutDown(this));
 
     for (BotAction botAction : botActions) {
-      botAction.start();
+      botAction.action();
     }
   }
 

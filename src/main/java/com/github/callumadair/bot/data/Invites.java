@@ -1,8 +1,8 @@
-package com.github.callumadair.data;
+package com.github.callumadair.bot.data;
 
 import java.util.*;
 
-import com.github.callumadair.Bot.*;
+import com.github.callumadair.bot.control.*;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.permission.PermissionType;
 import org.javacord.api.entity.permission.Permissions;
@@ -30,7 +30,7 @@ public class Invites extends BotAction {
   }
 
   /** Implements the methods of the class. */
-  public void start() {
+  public void action() {
     getBot()
         .getApi()
         .addMessageCreateListener(
